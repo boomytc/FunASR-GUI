@@ -1,1 +1,15 @@
+#忽略mac存储文件
 LMInit/.DS_Store
+
+# 忽略 Python 虚拟环境文件夹
+Include/
+Lib/
+Scripts/
+pyvenv.cfg
+
+# 通用的忽略规则
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
