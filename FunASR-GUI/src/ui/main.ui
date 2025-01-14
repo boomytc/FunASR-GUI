@@ -27,7 +27,7 @@
        <widget class="QPushButton" name="btn_asr_clear">
         <property name="geometry">
          <rect>
-          <x>190</x>
+          <x>280</x>
           <y>540</y>
           <width>81</width>
           <height>31</height>
@@ -40,7 +40,7 @@
        <widget class="QPushButton" name="btn_asr">
         <property name="geometry">
          <rect>
-          <x>390</x>
+          <x>380</x>
           <y>540</y>
           <width>81</width>
           <height>31</height>
@@ -235,6 +235,161 @@
               </widget>
              </item>
             </layout>
+           </widget>
+           <widget class="QFrame" name="frame">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>120</y>
+              <width>281</width>
+              <height>251</height>
+             </rect>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <widget class="QGroupBox" name="groupBox_asrSave">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>44</y>
+               <width>261</width>
+               <height>197</height>
+              </rect>
+             </property>
+             <property name="title">
+              <string>识别结果保存</string>
+             </property>
+             <widget class="QPushButton" name="btn_asrResultDirSelect">
+              <property name="geometry">
+               <rect>
+                <x>170</x>
+                <y>100</y>
+                <width>89</width>
+                <height>25</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>选择路径</string>
+              </property>
+             </widget>
+             <widget class="QGroupBox" name="groupBox_10">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>80</y>
+                <width>129</width>
+                <height>106</height>
+               </rect>
+              </property>
+              <property name="title">
+               <string>保存格式</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <item>
+                <widget class="QRadioButton" name="radioBtn_asrSaveTxtMode">
+                 <property name="text">
+                  <string>txt文本格式</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="radioBtn_asrSaveSrtMode">
+                 <property name="text">
+                  <string>srt字幕格式</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QPushButton" name="btn_asrResultDirOpen">
+              <property name="geometry">
+               <rect>
+                <x>170</x>
+                <y>130</y>
+                <width>89</width>
+                <height>25</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>打开路径</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="lab_asrSaveMessage">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>60</y>
+                <width>241</width>
+                <height>17</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <italic>true</italic>
+               </font>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+             <widget class="QWidget" name="">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>30</y>
+                <width>251</width>
+                <height>27</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>保存路径：</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_asrSavaDir"/>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+            <widget class="QCheckBox" name="chkbox_asrResultSave">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>121</width>
+               <height>28</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+               <italic>true</italic>
+              </font>
+             </property>
+             <property name="text">
+              <string>开启自动保存</string>
+             </property>
+            </widget>
            </widget>
           </widget>
          </item>

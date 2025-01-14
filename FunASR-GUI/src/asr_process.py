@@ -1,28 +1,14 @@
-from PySide6 import QtCore, QtWidgets, QtGui
-from PySide6.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QPushButton, QWidget
-import sys
+from PySide6.QtWidgets import QWidget, QMessageBox
 import os
-import torchaudio
-import numpy as np
-import torch
-
-sys.path.append(os.path.join(os.path.dirname(__file__), 'ui'))
-sys.path.append(os.path.join(os.path.dirname(__file__), 'services'))
-sys.path.append(os.path.join(os.path.dirname(__file__), 'utils'))
-sys.path.append(os.path.join(os.path.dirname(__file__), 'controllers'))
-from ui.main_ui import Ui_MainWindow
-from services.LM_init import ModelManager
-from services.LM_inference import ASRInference
-from utils.ffmpeg_utils import FFmpegUtils
 from controllers.model_controller import ModelController
 from controllers.file_controller import FileController
 
-class MainProcess(QMainWindow, Ui_MainWindow):
-    def __init__(self):
-        super(MainProcess, self).__init__()
-        self.setupUi(self)
-        self.m_flag = None
-        self.audio_file_path = None
+class ASRProcess(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        # 获取父窗口中的UI元素
+        self.ui = parent
+        self.setup_ui_elements()
         
         # 创建控制器实例
         self.model_controller = ModelController(self)
@@ -32,6 +18,28 @@ class MainProcess(QMainWindow, Ui_MainWindow):
         self.setup_model_combobox()
         
         # 连接信号
+        self.connect_signals()
+        
+    def setup_ui_elements(self):
+        """获取需要的UI元素引用"""
+        self.combox_modelSelect = self.ui.combox_modelSelect
+        self.btn_upload_audio = self.ui.btn_upload_audio
+        self.btn_asr = self.ui.btn_asr
+        self.btn_asr_clear = self.ui.btn_asr_clear
+        self.btn_asrResultDirSelect = self.ui.btn_asrResultDirSelect
+        self.chkbox_asrResultSave = self.ui.chkbox_asrResultSave
+        self.btn_asrResultDirOpen = self.ui.btn_asrResultDirOpen
+        self.label_audioname = self.ui.label_audioname
+        self.lineEdit_asrSavaDir = self.ui.lineEdit_asrSavaDir
+        self.groupBox_asrSave = self.ui.groupBox_asrSave
+        self.txtEdit_result = self.ui.txtEdit_result
+        self.lab_asrSaveMessage = self.ui.lab_asrSaveMessage
+        self.radiobtn_timestampY = self.ui.radiobtn_timestampY
+        self.radiobtn_spkY = self.ui.radiobtn_spkY
+        self.radioBtn_asrSaveTxtMode = self.ui.radioBtn_asrSaveTxtMode
+
+    def connect_signals(self):
+        """连接所有信号槽"""
         self.combox_modelSelect.currentIndexChanged.connect(self.model_init)
         self.btn_upload_audio.clicked.connect(self.upload_audio)
         self.btn_asr.clicked.connect(self.asr)
@@ -40,6 +48,7 @@ class MainProcess(QMainWindow, Ui_MainWindow):
         self.chkbox_asrResultSave.stateChanged.connect(self.asr_result_save_state)
         self.btn_asrResultDirOpen.clicked.connect(self.open_asr_result_dir)
 
+    # [原MainProcess.py中的其他方法移到这里，保持不变]
     #设置模型ComboBox
     def setup_model_combobox(self):
         # 清空ComboBox
@@ -49,16 +58,12 @@ class MainProcess(QMainWindow, Ui_MainWindow):
         # 从控制器获取模型列表
         self.combox_modelSelect.addItems(self.model_controller.get_model_names())
 
+    #模型初始化
     def model_init(self):
         # 获取当前选择的模型名称
         current_model = self.combox_modelSelect.currentText()
         # 使用控制器初始化模型
         self.model_controller.initialize_model(current_model)
-
-    def closeEvent(self, event):
-        self.m_flag = False
-        self.file_controller.cleanup() 
-        event.accept()
 
     #处理音频文件上传
     def upload_audio(self):

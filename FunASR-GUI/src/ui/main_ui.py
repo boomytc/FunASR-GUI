@@ -16,11 +16,11 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QGridLayout, QGroupBox,
-    QHBoxLayout, QLabel, QMainWindow, QMenu,
-    QMenuBar, QPushButton, QRadioButton, QSizePolicy,
-    QStatusBar, QTabWidget, QTextEdit, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
+    QGridLayout, QGroupBox, QHBoxLayout, QLabel,
+    QLineEdit, QMainWindow, QMenu, QMenuBar,
+    QPushButton, QRadioButton, QSizePolicy, QStatusBar,
+    QTabWidget, QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -37,10 +37,10 @@ class Ui_MainWindow(object):
         self.tab_asr.setObjectName(u"tab_asr")
         self.btn_asr_clear = QPushButton(self.tab_asr)
         self.btn_asr_clear.setObjectName(u"btn_asr_clear")
-        self.btn_asr_clear.setGeometry(QRect(190, 540, 81, 31))
+        self.btn_asr_clear.setGeometry(QRect(280, 540, 81, 31))
         self.btn_asr = QPushButton(self.tab_asr)
         self.btn_asr.setObjectName(u"btn_asr")
-        self.btn_asr.setGeometry(QRect(390, 540, 81, 31))
+        self.btn_asr.setGeometry(QRect(380, 540, 81, 31))
         self.widget = QWidget(self.tab_asr)
         self.widget.setObjectName(u"widget")
         self.widget.setGeometry(QRect(12, 2, 771, 531))
@@ -142,6 +142,66 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.radiobtn_spkN, 0, 1, 1, 1)
 
+        self.frame = QFrame(self.groupBox_3)
+        self.frame.setObjectName(u"frame")
+        self.frame.setEnabled(True)
+        self.frame.setGeometry(QRect(10, 120, 281, 251))
+        self.frame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Shadow.Raised)
+        self.groupBox_asrSave = QGroupBox(self.frame)
+        self.groupBox_asrSave.setObjectName(u"groupBox_asrSave")
+        self.groupBox_asrSave.setEnabled(False)
+        self.groupBox_asrSave.setGeometry(QRect(10, 44, 261, 197))
+        self.btn_asrResultDirSelect = QPushButton(self.groupBox_asrSave)
+        self.btn_asrResultDirSelect.setObjectName(u"btn_asrResultDirSelect")
+        self.btn_asrResultDirSelect.setGeometry(QRect(170, 100, 89, 25))
+        self.groupBox_10 = QGroupBox(self.groupBox_asrSave)
+        self.groupBox_10.setObjectName(u"groupBox_10")
+        self.groupBox_10.setGeometry(QRect(10, 80, 129, 106))
+        self.verticalLayout_2 = QVBoxLayout(self.groupBox_10)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.radioBtn_asrSaveTxtMode = QRadioButton(self.groupBox_10)
+        self.radioBtn_asrSaveTxtMode.setObjectName(u"radioBtn_asrSaveTxtMode")
+        self.radioBtn_asrSaveTxtMode.setChecked(True)
+
+        self.verticalLayout_2.addWidget(self.radioBtn_asrSaveTxtMode)
+
+        self.radioBtn_asrSaveSrtMode = QRadioButton(self.groupBox_10)
+        self.radioBtn_asrSaveSrtMode.setObjectName(u"radioBtn_asrSaveSrtMode")
+
+        self.verticalLayout_2.addWidget(self.radioBtn_asrSaveSrtMode)
+
+        self.btn_asrResultDirOpen = QPushButton(self.groupBox_asrSave)
+        self.btn_asrResultDirOpen.setObjectName(u"btn_asrResultDirOpen")
+        self.btn_asrResultDirOpen.setGeometry(QRect(170, 130, 89, 25))
+        self.lab_asrSaveMessage = QLabel(self.groupBox_asrSave)
+        self.lab_asrSaveMessage.setObjectName(u"lab_asrSaveMessage")
+        self.lab_asrSaveMessage.setGeometry(QRect(10, 60, 241, 17))
+        self.lab_asrSaveMessage.setFont(font1)
+        self.widget1 = QWidget(self.groupBox_asrSave)
+        self.widget1.setObjectName(u"widget1")
+        self.widget1.setGeometry(QRect(10, 30, 251, 27))
+        self.horizontalLayout_3 = QHBoxLayout(self.widget1)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.label_2 = QLabel(self.widget1)
+        self.label_2.setObjectName(u"label_2")
+
+        self.horizontalLayout_3.addWidget(self.label_2)
+
+        self.lineEdit_asrSavaDir = QLineEdit(self.widget1)
+        self.lineEdit_asrSavaDir.setObjectName(u"lineEdit_asrSavaDir")
+
+        self.horizontalLayout_3.addWidget(self.lineEdit_asrSavaDir)
+
+        self.chkbox_asrResultSave = QCheckBox(self.frame)
+        self.chkbox_asrResultSave.setObjectName(u"chkbox_asrResultSave")
+        self.chkbox_asrResultSave.setEnabled(True)
+        self.chkbox_asrResultSave.setGeometry(QRect(10, 10, 121, 28))
+        font2 = QFont()
+        font2.setPointSize(11)
+        font2.setItalic(True)
+        self.chkbox_asrResultSave.setFont(font2)
 
         self.horizontalLayout_2.addWidget(self.groupBox_3)
 
@@ -208,6 +268,15 @@ class Ui_MainWindow(object):
         self.groupBox_5.setTitle(QCoreApplication.translate("MainWindow", u"\u8bf4\u8bdd\u4eba\u533a\u5206", None))
         self.radiobtn_spkY.setText(QCoreApplication.translate("MainWindow", u"\u662f", None))
         self.radiobtn_spkN.setText(QCoreApplication.translate("MainWindow", u"\u5426", None))
+        self.groupBox_asrSave.setTitle(QCoreApplication.translate("MainWindow", u"\u8bc6\u522b\u7ed3\u679c\u4fdd\u5b58", None))
+        self.btn_asrResultDirSelect.setText(QCoreApplication.translate("MainWindow", u"\u9009\u62e9\u8def\u5f84", None))
+        self.groupBox_10.setTitle(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58\u683c\u5f0f", None))
+        self.radioBtn_asrSaveTxtMode.setText(QCoreApplication.translate("MainWindow", u"txt\u6587\u672c\u683c\u5f0f", None))
+        self.radioBtn_asrSaveSrtMode.setText(QCoreApplication.translate("MainWindow", u"srt\u5b57\u5e55\u683c\u5f0f", None))
+        self.btn_asrResultDirOpen.setText(QCoreApplication.translate("MainWindow", u"\u6253\u5f00\u8def\u5f84", None))
+        self.lab_asrSaveMessage.setText("")
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58\u8def\u5f84\uff1a", None))
+        self.chkbox_asrResultSave.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u542f\u81ea\u52a8\u4fdd\u5b58", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_asr), QCoreApplication.translate("MainWindow", u"\u8bed\u97f3\u8bc6\u522b", None))
         self.groupBox_7.setTitle(QCoreApplication.translate("MainWindow", u"\u57fa\u7840\u8bbe\u7f6e", None))
         self.groupBox_8.setTitle(QCoreApplication.translate("MainWindow", u"\u8fdb\u9636\u8bbe\u7f6e", None))
