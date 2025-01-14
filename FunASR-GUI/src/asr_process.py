@@ -84,9 +84,10 @@ class ASRProcess(QWidget):
         self.combox_modelSelect.clear()
         self.combox_modelSelect_batch.clear()
         
-        # 添加一个空选项
-        self.combox_modelSelect.addItem("")
-        self.combox_modelSelect_batch.addItem("")
+        # 添加默认选项
+        default_text = "请选择语音识别模型"
+        self.combox_modelSelect.addItem(default_text)
+        self.combox_modelSelect_batch.addItem(default_text)
         
         # 从控制器获取模型列表
         model_names = self.model_controller.get_model_names()
@@ -252,8 +253,15 @@ class ASRProcess(QWidget):
         failed_files = []
         total_files = len(audio_files)
         
+        # 初始化状态栏
+        self.statusbar.showMessage("准备开始处理...")
+        
         for index, audio_file in enumerate(audio_files, 1):
             file_name = os.path.basename(audio_file)
+            # 更新状态栏进度
+            progress = (index / total_files) * 100
+            self.statusbar.showMessage(f"正在处理: {file_name} | 进度: {progress:.1f}% ({index}/{total_files})")
+            
             self.plainTextEdit_batch_asr_result.appendPlainText(f"正在处理 ({index}/{total_files}): {file_name}")
             
             try:
@@ -312,3 +320,7 @@ class ASRProcess(QWidget):
                 summary += f"\n{file}: {error}"
         
         self.plainTextEdit_batch_asr_result.appendPlainText(summary)
+        
+        # 更新最终状态
+        success_rate = (processed_count / total_files) * 100
+        self.statusbar.showMessage(f"处理完成 | 成功率: {success_rate:.1f}% ({processed_count}/{total_files})")
