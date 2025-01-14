@@ -16,86 +16,170 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QHBoxLayout, QLabel,
-    QMainWindow, QMenu, QMenuBar, QPushButton,
-    QSizePolicy, QStatusBar, QTextEdit, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QGridLayout, QGroupBox,
+    QHBoxLayout, QLabel, QMainWindow, QMenu,
+    QMenuBar, QPushButton, QRadioButton, QSizePolicy,
+    QStatusBar, QTabWidget, QTextEdit, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(605, 584)
+        MainWindow.resize(705, 687)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.layoutWidget = QWidget(self.centralwidget)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(30, 20, 531, 471))
-        self.verticalLayout = QVBoxLayout(self.layoutWidget)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.combox_modelSelect = QComboBox(self.layoutWidget)
+        self.gridLayout = QGridLayout(self.centralwidget)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.tabWidget = QTabWidget(self.centralwidget)
+        self.tabWidget.setObjectName(u"tabWidget")
+        self.tab_asr = QWidget()
+        self.tab_asr.setObjectName(u"tab_asr")
+        self.groupBox = QGroupBox(self.tab_asr)
+        self.groupBox.setObjectName(u"groupBox")
+        self.groupBox.setGeometry(QRect(10, 0, 661, 121))
+        self.gridLayout_2 = QGridLayout(self.groupBox)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.combox_modelSelect = QComboBox(self.groupBox)
+        self.combox_modelSelect.addItem("")
         self.combox_modelSelect.setObjectName(u"combox_modelSelect")
 
-        self.verticalLayout.addWidget(self.combox_modelSelect)
+        self.gridLayout_2.addWidget(self.combox_modelSelect, 0, 0, 1, 1)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.btn_upload_audio = QPushButton(self.layoutWidget)
+        self.btn_upload_audio = QPushButton(self.groupBox)
         self.btn_upload_audio.setObjectName(u"btn_upload_audio")
         self.btn_upload_audio.setMaximumSize(QSize(120, 80))
 
         self.horizontalLayout.addWidget(self.btn_upload_audio)
 
-        self.label_audioname = QLabel(self.layoutWidget)
+        self.label_audioname = QLabel(self.groupBox)
         self.label_audioname.setObjectName(u"label_audioname")
 
         self.horizontalLayout.addWidget(self.label_audioname)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.gridLayout_2.addLayout(self.horizontalLayout, 1, 0, 1, 1)
 
-        self.txtEdit_result = QTextEdit(self.layoutWidget)
+        self.groupBox_2 = QGroupBox(self.tab_asr)
+        self.groupBox_2.setObjectName(u"groupBox_2")
+        self.groupBox_2.setGeometry(QRect(10, 310, 661, 211))
+        self.gridLayout_3 = QGridLayout(self.groupBox_2)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.txtEdit_result = QTextEdit(self.groupBox_2)
         self.txtEdit_result.setObjectName(u"txtEdit_result")
+        self.txtEdit_result.setReadOnly(True)
 
-        self.verticalLayout.addWidget(self.txtEdit_result)
+        self.gridLayout_3.addWidget(self.txtEdit_result, 0, 0, 1, 1)
 
-        self.btn_asr = QPushButton(self.layoutWidget)
+        self.btn_asr_clear = QPushButton(self.tab_asr)
+        self.btn_asr_clear.setObjectName(u"btn_asr_clear")
+        self.btn_asr_clear.setGeometry(QRect(190, 540, 81, 31))
+        self.groupBox_3 = QGroupBox(self.tab_asr)
+        self.groupBox_3.setObjectName(u"groupBox_3")
+        self.groupBox_3.setGeometry(QRect(10, 120, 661, 181))
+        self.groupBox_4 = QGroupBox(self.groupBox_3)
+        self.groupBox_4.setObjectName(u"groupBox_4")
+        self.groupBox_4.setGeometry(QRect(10, 20, 110, 72))
+        self.gridLayout_4 = QGridLayout(self.groupBox_4)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.radiobtn_timestampY = QRadioButton(self.groupBox_4)
+        self.radiobtn_timestampY.setObjectName(u"radiobtn_timestampY")
+
+        self.gridLayout_4.addWidget(self.radiobtn_timestampY, 0, 0, 1, 1)
+
+        self.radiobtn_timestampN = QRadioButton(self.groupBox_4)
+        self.radiobtn_timestampN.setObjectName(u"radiobtn_timestampN")
+        self.radiobtn_timestampN.setChecked(True)
+
+        self.gridLayout_4.addWidget(self.radiobtn_timestampN, 0, 1, 1, 1)
+
+        self.groupBox_5 = QGroupBox(self.groupBox_3)
+        self.groupBox_5.setObjectName(u"groupBox_5")
+        self.groupBox_5.setGeometry(QRect(130, 20, 110, 72))
+        self.gridLayout_5 = QGridLayout(self.groupBox_5)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.radiobtn_spkY = QRadioButton(self.groupBox_5)
+        self.radiobtn_spkY.setObjectName(u"radiobtn_spkY")
+
+        self.gridLayout_5.addWidget(self.radiobtn_spkY, 0, 0, 1, 1)
+
+        self.radiobtn_spkN = QRadioButton(self.groupBox_5)
+        self.radiobtn_spkN.setObjectName(u"radiobtn_spkN")
+        self.radiobtn_spkN.setChecked(True)
+
+        self.gridLayout_5.addWidget(self.radiobtn_spkN, 0, 1, 1, 1)
+
+        self.btn_asr = QPushButton(self.tab_asr)
         self.btn_asr.setObjectName(u"btn_asr")
+        self.btn_asr.setGeometry(QRect(390, 540, 81, 31))
+        self.tabWidget.addTab(self.tab_asr, "")
+        self.tab_tts = QWidget()
+        self.tab_tts.setObjectName(u"tab_tts")
+        self.groupBox_7 = QGroupBox(self.tab_tts)
+        self.groupBox_7.setObjectName(u"groupBox_7")
+        self.groupBox_7.setGeometry(QRect(20, 10, 601, 121))
+        self.groupBox_8 = QGroupBox(self.tab_tts)
+        self.groupBox_8.setObjectName(u"groupBox_8")
+        self.groupBox_8.setGeometry(QRect(20, 170, 621, 241))
+        self.groupBox_6 = QGroupBox(self.groupBox_8)
+        self.groupBox_6.setObjectName(u"groupBox_6")
+        self.groupBox_6.setGeometry(QRect(20, 30, 211, 111))
+        self.label = QLabel(self.groupBox_6)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(10, 30, 67, 17))
+        self.tabWidget.addTab(self.tab_tts, "")
+        self.tab_audioprocess = QWidget()
+        self.tab_audioprocess.setObjectName(u"tab_audioprocess")
+        self.tabWidget.addTab(self.tab_audioprocess, "")
 
-        self.verticalLayout.addWidget(self.btn_asr)
+        self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 605, 27))
+        self.menubar.setGeometry(QRect(0, 0, 705, 27))
         self.menu = QMenu(self.menubar)
         self.menu.setObjectName(u"menu")
-        self.menu_2 = QMenu(self.menubar)
-        self.menu_2.setObjectName(u"menu_2")
-        self.menu_3 = QMenu(self.menubar)
-        self.menu_3.setObjectName(u"menu_3")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
         self.menubar.addAction(self.menu.menuAction())
-        self.menubar.addAction(self.menu_2.menuAction())
-        self.menubar.addAction(self.menu_3.menuAction())
 
         self.retranslateUi(MainWindow)
+
+        self.tabWidget.setCurrentIndex(0)
+
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"FunASR-GUI", None))
+        self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"\u57fa\u7840\u8bbe\u7f6e", None))
+        self.combox_modelSelect.setItemText(0, QCoreApplication.translate("MainWindow", u"\u8bf7\u9009\u62e9\u8bed\u97f3\u8bc6\u522b\u6a21\u578b", None))
+
         self.btn_upload_audio.setText(QCoreApplication.translate("MainWindow", u"\u4e0a\u4f20", None))
         self.label_audioname.setText(QCoreApplication.translate("MainWindow", u"\u8bf7\u4e0a\u4f20\u9700\u8981\u8bc6\u522b\u7684\u97f3\u9891\u6587\u4ef6", None))
+        self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"\u8bc6\u522b\u7ed3\u679c", None))
+        self.btn_asr_clear.setText(QCoreApplication.translate("MainWindow", u"\u6e05\u9664\u5185\u5bb9", None))
+        self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"\u8fdb\u9636\u8bbe\u7f6e", None))
+        self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"\u65f6\u95f4\u8f8d", None))
+        self.radiobtn_timestampY.setText(QCoreApplication.translate("MainWindow", u"\u662f", None))
+        self.radiobtn_timestampN.setText(QCoreApplication.translate("MainWindow", u"\u5426", None))
+        self.groupBox_5.setTitle(QCoreApplication.translate("MainWindow", u"\u8bf4\u8bdd\u4eba\u533a\u5206", None))
+        self.radiobtn_spkY.setText(QCoreApplication.translate("MainWindow", u"\u662f", None))
+        self.radiobtn_spkN.setText(QCoreApplication.translate("MainWindow", u"\u5426", None))
         self.btn_asr.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u8bc6\u522b", None))
-        self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u8bed\u97f3\u8bc6\u522b", None))
-        self.menu_2.setTitle(QCoreApplication.translate("MainWindow", u"\u8bed\u97f3\u5408\u6210", None))
-        self.menu_3.setTitle(QCoreApplication.translate("MainWindow", u"\u97f3\u89c6\u9891\u5904\u7406", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_asr), QCoreApplication.translate("MainWindow", u"\u8bed\u97f3\u8bc6\u522b", None))
+        self.groupBox_7.setTitle(QCoreApplication.translate("MainWindow", u"\u57fa\u7840\u8bbe\u7f6e", None))
+        self.groupBox_8.setTitle(QCoreApplication.translate("MainWindow", u"\u8fdb\u9636\u8bbe\u7f6e", None))
+        self.groupBox_6.setTitle(QCoreApplication.translate("MainWindow", u"\u97f3\u9891", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"\u8bf4\u8bdd\u901f\u5ea6", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_tts), QCoreApplication.translate("MainWindow", u"\u8bed\u97f3\u5408\u6210", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_audioprocess), QCoreApplication.translate("MainWindow", u"\u97f3\u89c6\u9891\u5904\u7406", None))
+        self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u8bbe\u7f6e", None))
     # retranslateUi
 

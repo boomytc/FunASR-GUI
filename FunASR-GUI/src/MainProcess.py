@@ -2,27 +2,31 @@ from PySide6 import QtCore, QtWidgets, QtGui
 from PySide6.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QPushButton, QWidget
 import sys
 import os
-
-# 先添加路径
-sys.path.append(os.path.join(os.path.dirname(__file__), 'ui'))
-sys.path.append(os.path.join(os.path.dirname(__file__), 'services'))
-
-# 然后再导入
-from ui.main_ui import Ui_MainWindow
-from services.LM_init import ModelManager
 import torchaudio
 import numpy as np
 import torch
+
+sys.path.append(os.path.join(os.path.dirname(__file__), 'ui'))
+sys.path.append(os.path.join(os.path.dirname(__file__), 'services'))
+sys.path.append(os.path.join(os.path.dirname(__file__), 'utils'))
+sys.path.append(os.path.join(os.path.dirname(__file__), 'controllers'))
+from ui.main_ui import Ui_MainWindow
+from services.LM_init import ModelManager
+from services.LM_inference import ASRInference
+from utils.ffmpeg_utils import FFmpegUtils
+from controllers.model_controller import ModelController
+from controllers.file_controller import FileController
 
 class MainProcess(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MainProcess, self).__init__()
         self.setupUi(self)
         self.m_flag = None
-        self.audio_file_path = None  # 保存音频文件完整路径
+        self.audio_file_path = None
         
-        # 创建模型管理器实例
-        self.model_manager = ModelManager()
+        # 创建控制器实例
+        self.model_controller = ModelController(self)
+        self.file_controller = FileController(self)
         
         # 设置ComboBox
         self.setup_model_combobox()
@@ -31,97 +35,81 @@ class MainProcess(QMainWindow, Ui_MainWindow):
         self.combox_modelSelect.currentIndexChanged.connect(self.model_init)
         self.btn_upload_audio.clicked.connect(self.upload_audio)
         self.btn_asr.clicked.connect(self.asr)
+        self.btn_asr_clear.clicked.connect(self.clear_asr)
+        self.radiobtn_timestampY.clicked.connect(self.timestamp_mode)
+        self.radiobtn_timestampN.clicked.connect(self.timestamp_mode)
+        self.radiobtn_spkY.clicked.connect(self.spk_mode)
+        self.radiobtn_spkN.clicked.connect(self.spk_mode)
 
+    #设置模型ComboBox
     def setup_model_combobox(self):
         # 清空ComboBox
         self.combox_modelSelect.clear()
         # 添加一个空选项
         self.combox_modelSelect.addItem("")
-        # 添加所有模型选项
-        self.combox_modelSelect.addItems(self.model_manager.get_model_names())
+        # 从控制器获取模型列表
+        self.combox_modelSelect.addItems(self.model_controller.get_model_names())
 
     def model_init(self):
         # 获取当前选择的模型名称
         current_model = self.combox_modelSelect.currentText()
-        
-        # 如果选择为空，直接返回
-        if not current_model:
-            return
-            
-        try:
-            # 初始化模型
-            self.model_manager.init_model(current_model)
-            # 初始化成功后显示提示
-            QMessageBox.information(self, "提示", f"模型 {current_model} 初始化成功！")
-            
-        except Exception as e:
-            # 初始化失败时显示错误信息
-            QMessageBox.critical(self, "错误", f"模型初始化失败：{str(e)}")
+        # 使用控制器初始化模型
+        self.model_controller.initialize_model(current_model)
 
     def closeEvent(self, event):
-        #在关闭窗口时，释放资源
+        # 在关闭窗口时，释放资源
         self.m_flag = False
+        FFmpegUtils._cleanup_temp_files()  # 清理临时文件
         event.accept()
 
+    #处理音频文件上传
     def upload_audio(self):
-        # 从文件系统选择音视频文件，并显示在lab_audioname中
-        file_dialog = QFileDialog()
-        # 设置文件过滤器，只显示音视频文件
-        file_filter = "音视频文件 (*.mp3 *.wav *.mp4 *.avi *.mkv);;所有文件 (*.*)"
-        # 打开文件选择对话框
-        file_path, _ = file_dialog.getOpenFileName(
-            self,
-            "选择音视频文件",
-            "",
-            file_filter
+        success, result = self.file_controller.upload_audio()
+        if success:
+            self.audio_file_path = result  # 保存处理后的临时文件路径
+            # 显示原始文件名
+            original_filename = self.file_controller.get_original_filename()
+            self.label_audioname.setText(original_filename)
+        else:
+            QMessageBox.critical(self, "错误", result)
+
+    #语音识别处理
+    def asr(self):
+        # 使用文件控制器检查音频文件
+        if not self.file_controller.get_current_audio_path():
+            QMessageBox.warning(self, "警告", "请先选择音频文件！")
+            return
+        
+        # 获取时间戳和说话人模式设置
+        use_timestamp = self.radiobtn_timestampY.isChecked()
+        distinguish_speaker = self.radiobtn_spkY.isChecked()
+        
+        # 执行语音识别
+        success, result = self.model_controller.perform_asr(
+            self.audio_file_path,
+            use_timestamp=use_timestamp,
+            distinguish_speaker=distinguish_speaker
         )
         
-        if file_path:
-            # 保存完整文件路径
-            self.audio_file_path = file_path
-            # 只显示文件名
-            file_name = file_path.split('/')[-1]
-            self.label_audioname.setText(file_name)
+        if success:
+            self.txtEdit_result.setText(result)
+        else:
+            QMessageBox.critical(self, "错误", result)
 
-    def asr(self):
-        try:
-            # 检查是否已选择音频文件
-            if not self.audio_file_path:
-                QMessageBox.warning(self, "警告", "请先选择音频文件！")
-                return
-            
-            # 检查模型是否已初始化
-            if not self.model_manager.is_model_initialized():
-                QMessageBox.warning(self, "警告", "请先初始化模型！")
-                return
-            
-            # 使用完整路径加载音频文件
-            waveform, sample_rate = torchaudio.load(self.audio_file_path)
-            
-            # 重采样到16kHz
-            if sample_rate != 16000:
-                resampler = torchaudio.transforms.Resample(sample_rate, 16000)
-                waveform = resampler(waveform)
-            
-            # 转换为单声道
-            if waveform.dim() > 1:
-                waveform = waveform.mean(0)
-            
-            # 转换为float32格式
-            waveform = waveform.numpy().astype(np.float32)
-            
-            # 执行推理
-            result = self.model_manager.inference(waveform)
-            
-            # 显示识别结果
-            if result and len(result) > 0:
-                self.txtEdit_result.setText(result[0]["text"])
-            else:
-                self.txtEdit_result.setText("未能识别出文本")
-            
-            # 清理缓存
-            if hasattr(torch.cuda, 'empty_cache'):
-                torch.cuda.empty_cache()
-            
-        except Exception as e:
-            QMessageBox.critical(self, "错误", f"识别过程出错：{str(e)}")
+    #清除语音识别结果
+    def clear_asr(self):
+        self.txtEdit_result.clear()
+
+    #设置时间戳模式
+    def timestamp_mode(self):
+        if self.radiobtn_timestampY.isChecked():
+            pass
+        elif self.radiobtn_timestampN.isChecked():
+            pass
+
+    #设置说话人模式
+    def spk_mode(self):
+        if self.radiobtn_spkY.isChecked():
+            pass
+        elif self.radiobtn_spkN.isChecked():
+            pass

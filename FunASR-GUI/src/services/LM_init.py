@@ -82,22 +82,17 @@ class ModelManager:
             spk_model=config["spk_model"],
         )
 
-    def inference(self, waveform):
-        inference_config = {
-            "batch_size_s": 360,
-            "num_workers": 13,
-            "use_gpu": False,
-            "device_id": -1,
-            "cache_size": 204800,
-            "chunk_size": 1600,
-        }
-        
+    def inference(self, waveform, **kwargs):
+        """执行推理
+        Args:
+            waveform: 音频波形数据
+            **kwargs: 其他推理参数
+        Returns:
+            推理结果
+        """
         return self.model.generate(
             input=waveform,
             cache={},
-            language="zh",
-            use_itn=True,
-            merge_vad=True,
-            **inference_config
+            **kwargs
         )
 
