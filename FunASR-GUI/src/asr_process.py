@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QWidget, QMessageBox
 import os
-from controllers.model_controller import ModelController
+from controllers.model_controller import ASRModelController
 from controllers.file_controller import FileController
 
 class ASRProcess(QWidget):
@@ -11,7 +11,7 @@ class ASRProcess(QWidget):
         self.setup_ui_elements()
         
         # 创建控制器实例
-        self.model_controller = ModelController(self)
+        self.model_controller = ASRModelController(self)
         self.file_controller = FileController(self)
         
         # 设置ComboBox

@@ -119,3 +119,6 @@ class ASRInference:
     def cleanup():
         if hasattr(torch.cuda, 'empty_cache'):
             torch.cuda.empty_cache()
+
+class TTSInference:
+    pass

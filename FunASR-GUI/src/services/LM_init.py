@@ -3,7 +3,7 @@ import torch
 from funasr import AutoModel
 from PySide6.QtCore import QSettings
 
-class ModelManager:
+class ASRModelManager:
     def __init__(self):
         # 使用 QSettings 读取配置
         self.settings = QSettings('FunASR', 'FunASR-GUI')
@@ -96,3 +96,5 @@ class ModelManager:
             **kwargs
         )
 
+class TTSModelManager:
+    pass
