@@ -11,7 +11,7 @@ class ASRModelController:
         # 在控制器中创建模型管理器实例
         self.model_manager = ASRModelManager()
 
-    #初始化指定的模型(model_name: 要初始化的模型名称 | bool: 初始化是否成功)
+    #初始化指定的ASR模型(model_name: 要初始化的模型名称 | bool: 初始化是否成功)
     def initialize_model(self, model_name: str) -> bool:
         if not model_name:
             return False
@@ -77,4 +77,44 @@ class ASRModelController:
 
 #TTS模型控制器，负责处理与TTS模型相关的操作和UI交互
 class TTSModelController:
-    pass
+    def __init__(self, parent_widget=None):
+        self.parent_widget = parent_widget
+
+        self.model_manager = TTSModelManager()
+
+    def initialize_model(self, model_name: str) -> bool:
+        if not model_name:
+            return False
+
+        try:
+            self.model_manager.init_model(model_name)
+
+            if self.parent_widget:
+                QMessageBox.information(
+                    self.parent_widget,
+                    "提示",
+                    f"模型 {model_name} 初始化成功！"
+                )
+            return True
+        
+        except Exception as e:
+            if self.parent_widget:
+                QMessageBox.critical(
+                    self.parent_widget,
+                    "错误",
+                    f"模型初始化失败：{str(e)}"
+                )
+            return False
+
+    def get_initialized_model(self) -> Optional[str]:
+        return self.model_manager.get_current_model_name()
+
+    def is_model_ready(self) -> bool:
+        return self.model_manager.is_model_initialized()
+    
+    def get_model_names(self) -> List[str]:
+        return self.model_manager.get_model_names()
+    
+    def inference(self, text: str, **kwargs):
+        # return self.model_manager.inference(text, **kwargs)
+        pass

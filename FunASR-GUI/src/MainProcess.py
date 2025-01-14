@@ -1,8 +1,7 @@
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtWidgets import QMainWindow, QMenu
 from ui.main_ui import Ui_MainWindow
 from asr_process import ASRProcess
-from tts_process import TTSProcess
-from audio_process import AudioProcess
+import os
 
 class MainProcess(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -12,12 +11,18 @@ class MainProcess(QMainWindow, Ui_MainWindow):
         
         # 初始化各个功能模块
         self.asr_process = ASRProcess(self)
-        self.tts_process = TTSProcess(self)
-        self.audio_process = AudioProcess(self)
+        # self.tts_process = TTSProcess(self)
+        # self.audio_process = AudioProcess(self)
+        
+        # 连接动作信号
+        self.act_open_setting_file.triggered.connect(self.open_setting_file)
+
+    def open_setting_file(self):
+        """打开配置文件"""
+        os.system('gedit FunASR-GUI/FunASR-GUI/config.ini')
 
     def closeEvent(self, event):
         self.m_flag = False
-        # 清理所有模块的资源
         if hasattr(self, 'asr_process'):
             self.asr_process.file_controller.cleanup()
         event.accept()

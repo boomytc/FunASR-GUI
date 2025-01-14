@@ -18,15 +18,18 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
     QGridLayout, QGroupBox, QHBoxLayout, QLabel,
-    QLineEdit, QMainWindow, QMenu, QMenuBar,
-    QPushButton, QRadioButton, QSizePolicy, QStatusBar,
-    QTabWidget, QTextEdit, QVBoxLayout, QWidget)
+    QLineEdit, QMainWindow, QPushButton, QRadioButton,
+    QSizePolicy, QStatusBar, QTabWidget, QTextEdit,
+    QToolBar, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(808, 687)
+        MainWindow.resize(830, 748)
+        self.act_open_setting_file = QAction(MainWindow)
+        self.act_open_setting_file.setObjectName(u"act_open_setting_file")
+        self.act_open_setting_file.setMenuRole(QAction.MenuRole.NoRole)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout = QGridLayout(self.centralwidget)
@@ -35,15 +38,15 @@ class Ui_MainWindow(object):
         self.tabWidget.setObjectName(u"tabWidget")
         self.tab_asr = QWidget()
         self.tab_asr.setObjectName(u"tab_asr")
-        self.btn_asr_clear = QPushButton(self.tab_asr)
-        self.btn_asr_clear.setObjectName(u"btn_asr_clear")
-        self.btn_asr_clear.setGeometry(QRect(280, 540, 81, 31))
-        self.btn_asr = QPushButton(self.tab_asr)
-        self.btn_asr.setObjectName(u"btn_asr")
-        self.btn_asr.setGeometry(QRect(380, 540, 81, 31))
-        self.widget = QWidget(self.tab_asr)
+        self.gridLayout_6 = QGridLayout(self.tab_asr)
+        self.gridLayout_6.setObjectName(u"gridLayout_6")
+        self.tabWidget_2 = QTabWidget(self.tab_asr)
+        self.tabWidget_2.setObjectName(u"tabWidget_2")
+        self.tab_single_asr = QWidget()
+        self.tab_single_asr.setObjectName(u"tab_single_asr")
+        self.widget = QWidget(self.tab_single_asr)
         self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(12, 2, 771, 531))
+        self.widget.setGeometry(QRect(0, 0, 771, 531))
         self.horizontalLayout_2 = QHBoxLayout(self.widget)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -205,6 +208,120 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.groupBox_3)
 
+        self.btn_asr = QPushButton(self.tab_single_asr)
+        self.btn_asr.setObjectName(u"btn_asr")
+        self.btn_asr.setGeometry(QRect(330, 550, 81, 31))
+        self.btn_asr_clear = QPushButton(self.tab_single_asr)
+        self.btn_asr_clear.setObjectName(u"btn_asr_clear")
+        self.btn_asr_clear.setGeometry(QRect(220, 550, 81, 31))
+        self.tabWidget_2.addTab(self.tab_single_asr, "")
+        self.tab_batch_asr = QWidget()
+        self.tab_batch_asr.setObjectName(u"tab_batch_asr")
+        self.combox_modelSelect_batch = QComboBox(self.tab_batch_asr)
+        self.combox_modelSelect_batch.addItem("")
+        self.combox_modelSelect_batch.setObjectName(u"combox_modelSelect_batch")
+        self.combox_modelSelect_batch.setGeometry(QRect(10, 20, 421, 25))
+        self.combox_modelSelect_batch.setFont(font1)
+        self.groupBox_9 = QGroupBox(self.tab_batch_asr)
+        self.groupBox_9.setObjectName(u"groupBox_9")
+        self.groupBox_9.setGeometry(QRect(10, 50, 251, 111))
+        self.groupBox_11 = QGroupBox(self.groupBox_9)
+        self.groupBox_11.setObjectName(u"groupBox_11")
+        self.groupBox_11.setGeometry(QRect(10, 30, 100, 60))
+        self.groupBox_11.setMinimumSize(QSize(50, 60))
+        self.groupBox_11.setMaximumSize(QSize(100, 80))
+        self.gridLayout_7 = QGridLayout(self.groupBox_11)
+        self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.radiobtn_timestampY_batch_asr = QRadioButton(self.groupBox_11)
+        self.radiobtn_timestampY_batch_asr.setObjectName(u"radiobtn_timestampY_batch_asr")
+
+        self.gridLayout_7.addWidget(self.radiobtn_timestampY_batch_asr, 0, 0, 1, 1)
+
+        self.radiobtn_timestampN_batch_asr = QRadioButton(self.groupBox_11)
+        self.radiobtn_timestampN_batch_asr.setObjectName(u"radiobtn_timestampN_batch_asr")
+        self.radiobtn_timestampN_batch_asr.setChecked(True)
+
+        self.gridLayout_7.addWidget(self.radiobtn_timestampN_batch_asr, 0, 1, 1, 1)
+
+        self.groupBox_12 = QGroupBox(self.groupBox_9)
+        self.groupBox_12.setObjectName(u"groupBox_12")
+        self.groupBox_12.setGeometry(QRect(130, 30, 100, 60))
+        self.groupBox_12.setMinimumSize(QSize(50, 60))
+        self.groupBox_12.setMaximumSize(QSize(100, 80))
+        self.gridLayout_8 = QGridLayout(self.groupBox_12)
+        self.gridLayout_8.setObjectName(u"gridLayout_8")
+        self.radiobtn_spkY_batch_asr = QRadioButton(self.groupBox_12)
+        self.radiobtn_spkY_batch_asr.setObjectName(u"radiobtn_spkY_batch_asr")
+
+        self.gridLayout_8.addWidget(self.radiobtn_spkY_batch_asr, 0, 0, 1, 1)
+
+        self.radiobtn_spkN_batch_asr = QRadioButton(self.groupBox_12)
+        self.radiobtn_spkN_batch_asr.setObjectName(u"radiobtn_spkN_batch_asr")
+        self.radiobtn_spkN_batch_asr.setChecked(True)
+
+        self.gridLayout_8.addWidget(self.radiobtn_spkN_batch_asr, 0, 1, 1, 1)
+
+        self.btn_batch_asr = QPushButton(self.tab_batch_asr)
+        self.btn_batch_asr.setObjectName(u"btn_batch_asr")
+        self.btn_batch_asr.setGeometry(QRect(160, 310, 111, 31))
+        self.widget2 = QWidget(self.tab_batch_asr)
+        self.widget2.setObjectName(u"widget2")
+        self.widget2.setGeometry(QRect(11, 170, 585, 32))
+        self.horizontalLayout_4 = QHBoxLayout(self.widget2)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.label_3 = QLabel(self.widget2)
+        self.label_3.setObjectName(u"label_3")
+
+        self.horizontalLayout_4.addWidget(self.label_3)
+
+        self.lineEdit_batch_asr_inputDir = QLineEdit(self.widget2)
+        self.lineEdit_batch_asr_inputDir.setObjectName(u"lineEdit_batch_asr_inputDir")
+        self.lineEdit_batch_asr_inputDir.setMinimumSize(QSize(300, 0))
+
+        self.horizontalLayout_4.addWidget(self.lineEdit_batch_asr_inputDir)
+
+        self.btn_batch_asr_inputDir_select = QPushButton(self.widget2)
+        self.btn_batch_asr_inputDir_select.setObjectName(u"btn_batch_asr_inputDir_select")
+
+        self.horizontalLayout_4.addWidget(self.btn_batch_asr_inputDir_select)
+
+        self.btn_batch_asr_inputDir_open = QPushButton(self.widget2)
+        self.btn_batch_asr_inputDir_open.setObjectName(u"btn_batch_asr_inputDir_open")
+
+        self.horizontalLayout_4.addWidget(self.btn_batch_asr_inputDir_open)
+
+        self.widget3 = QWidget(self.tab_batch_asr)
+        self.widget3.setObjectName(u"widget3")
+        self.widget3.setGeometry(QRect(11, 220, 585, 32))
+        self.horizontalLayout_5 = QHBoxLayout(self.widget3)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.label_4 = QLabel(self.widget3)
+        self.label_4.setObjectName(u"label_4")
+
+        self.horizontalLayout_5.addWidget(self.label_4)
+
+        self.lineEdit_batch_asr_outputDir = QLineEdit(self.widget3)
+        self.lineEdit_batch_asr_outputDir.setObjectName(u"lineEdit_batch_asr_outputDir")
+        self.lineEdit_batch_asr_outputDir.setMinimumSize(QSize(300, 0))
+
+        self.horizontalLayout_5.addWidget(self.lineEdit_batch_asr_outputDir)
+
+        self.btn_batch_asr_outputDir_select = QPushButton(self.widget3)
+        self.btn_batch_asr_outputDir_select.setObjectName(u"btn_batch_asr_outputDir_select")
+
+        self.horizontalLayout_5.addWidget(self.btn_batch_asr_outputDir_select)
+
+        self.btn_batch_asr_outputDir_open = QPushButton(self.widget3)
+        self.btn_batch_asr_outputDir_open.setObjectName(u"btn_batch_asr_outputDir_open")
+
+        self.horizontalLayout_5.addWidget(self.btn_batch_asr_outputDir_open)
+
+        self.tabWidget_2.addTab(self.tab_batch_asr, "")
+
+        self.gridLayout_6.addWidget(self.tabWidget_2, 0, 1, 1, 1)
+
         self.tabWidget.addTab(self.tab_asr, "")
         self.tab_tts = QWidget()
         self.tab_tts.setObjectName(u"tab_tts")
@@ -231,21 +348,19 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QMenuBar(MainWindow)
-        self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 808, 27))
-        self.menu = QMenu(self.menubar)
-        self.menu.setObjectName(u"menu")
-        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.toolBar = QToolBar(MainWindow)
+        self.toolBar.setObjectName(u"toolBar")
+        MainWindow.addToolBar(Qt.ToolBarArea.TopToolBarArea, self.toolBar)
 
-        self.menubar.addAction(self.menu.menuAction())
+        self.toolBar.addAction(self.act_open_setting_file)
 
         self.retranslateUi(MainWindow)
 
         self.tabWidget.setCurrentIndex(0)
+        self.tabWidget_2.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -253,8 +368,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"FunASR-GUI", None))
-        self.btn_asr_clear.setText(QCoreApplication.translate("MainWindow", u"\u6e05\u9664\u5185\u5bb9", None))
-        self.btn_asr.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u8bc6\u522b", None))
+        self.act_open_setting_file.setText(QCoreApplication.translate("MainWindow", u"\u914d\u7f6e\u6587\u4ef6", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"\u57fa\u7840\u8bbe\u7f6e", None))
         self.btn_upload_audio.setText(QCoreApplication.translate("MainWindow", u"\u4e0a\u4f20", None))
         self.label_audioname.setText(QCoreApplication.translate("MainWindow", u"\u8bf7\u4e0a\u4f20\u9700\u8981\u8bc6\u522b\u7684\u97f3\u9891\u6587\u4ef6", None))
@@ -277,6 +391,26 @@ class Ui_MainWindow(object):
         self.lab_asrSaveMessage.setText("")
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58\u8def\u5f84\uff1a", None))
         self.chkbox_asrResultSave.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u542f\u81ea\u52a8\u4fdd\u5b58", None))
+        self.btn_asr.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u8bc6\u522b", None))
+        self.btn_asr_clear.setText(QCoreApplication.translate("MainWindow", u"\u6e05\u9664\u5185\u5bb9", None))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_single_asr), QCoreApplication.translate("MainWindow", u"\u5355\u8bed\u97f3\u8bc6\u522b", None))
+        self.combox_modelSelect_batch.setItemText(0, QCoreApplication.translate("MainWindow", u"\u8bf7\u9009\u62e9\u8bed\u97f3\u8bc6\u522b\u6a21\u578b", None))
+
+        self.groupBox_9.setTitle(QCoreApplication.translate("MainWindow", u"\u6a21\u5f0f\u9009\u62e9", None))
+        self.groupBox_11.setTitle(QCoreApplication.translate("MainWindow", u"\u65f6\u95f4\u8f8d", None))
+        self.radiobtn_timestampY_batch_asr.setText(QCoreApplication.translate("MainWindow", u"\u662f", None))
+        self.radiobtn_timestampN_batch_asr.setText(QCoreApplication.translate("MainWindow", u"\u5426", None))
+        self.groupBox_12.setTitle(QCoreApplication.translate("MainWindow", u"\u8bf4\u8bdd\u4eba\u533a\u5206", None))
+        self.radiobtn_spkY_batch_asr.setText(QCoreApplication.translate("MainWindow", u"\u662f", None))
+        self.radiobtn_spkN_batch_asr.setText(QCoreApplication.translate("MainWindow", u"\u5426", None))
+        self.btn_batch_asr.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u6279\u91cf\u8bc6\u522b", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u6279\u91cf\u8bc6\u522b\u76ee\u5f55\uff1a", None))
+        self.btn_batch_asr_inputDir_select.setText(QCoreApplication.translate("MainWindow", u"\u9009\u62e9\u76ee\u5f55", None))
+        self.btn_batch_asr_inputDir_open.setText(QCoreApplication.translate("MainWindow", u"\u6253\u5f00\u76ee\u5f55", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u8bc6\u522b\u7ed3\u679c\u76ee\u5f55\uff1a", None))
+        self.btn_batch_asr_outputDir_select.setText(QCoreApplication.translate("MainWindow", u"\u9009\u62e9\u76ee\u5f55", None))
+        self.btn_batch_asr_outputDir_open.setText(QCoreApplication.translate("MainWindow", u"\u6253\u5f00\u76ee\u5f55", None))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_batch_asr), QCoreApplication.translate("MainWindow", u"\u6279\u91cf\u8bed\u97f3\u8bc6\u522b", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_asr), QCoreApplication.translate("MainWindow", u"\u8bed\u97f3\u8bc6\u522b", None))
         self.groupBox_7.setTitle(QCoreApplication.translate("MainWindow", u"\u57fa\u7840\u8bbe\u7f6e", None))
         self.groupBox_8.setTitle(QCoreApplication.translate("MainWindow", u"\u8fdb\u9636\u8bbe\u7f6e", None))
@@ -285,6 +419,6 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_tts), QCoreApplication.translate("MainWindow", u"\u8bed\u97f3\u5408\u6210", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_audioprocess), QCoreApplication.translate("MainWindow", u"\u97f3\u89c6\u9891\u5904\u7406", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_asrModelCompare), QCoreApplication.translate("MainWindow", u"\u6a21\u578b\u5bf9\u6bd4", None))
-        self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u8bbe\u7f6e", None))
+        self.toolBar.setWindowTitle(QCoreApplication.translate("MainWindow", u"toolBar", None))
     # retranslateUi
 

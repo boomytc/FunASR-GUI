@@ -14,6 +14,10 @@ class ASRProcess(QWidget):
         self.model_controller = ASRModelController(self)
         self.file_controller = FileController(self)
         
+        # 批量处理的目录缓存
+        self.batch_input_dir = ""
+        self.batch_output_dir = ""
+        
         # 设置ComboBox
         self.setup_model_combobox()
         
@@ -36,7 +40,15 @@ class ASRProcess(QWidget):
         self.lab_asrSaveMessage = self.ui.lab_asrSaveMessage
         self.radiobtn_timestampY = self.ui.radiobtn_timestampY
         self.radiobtn_spkY = self.ui.radiobtn_spkY
-        self.radioBtn_asrSaveTxtMode = self.ui.radioBtn_asrSaveTxtMode
+        self.radioBtn_asrSaveTxtMode = self.ui.radioBtn_asrSaveTxtMode   
+        self.combox_modelSelect_batch = self.ui.combox_modelSelect_batch
+        self.btn_batch_asr_inputDir_select = self.ui.btn_batch_asr_inputDir_select
+        self.btn_batch_asr_outputDir_select = self.ui.btn_batch_asr_outputDir_select
+        self.btn_batch_asr_inputDir_open = self.ui.btn_batch_asr_inputDir_open
+        self.lineEdit_batch_asr_inputDir = self.ui.lineEdit_batch_asr_inputDir
+        self.lineEdit_batch_asr_outputDir = self.ui.lineEdit_batch_asr_outputDir
+        self.btn_batch_asr_outputDir_open = self.ui.btn_batch_asr_outputDir_open
+        self.btn_batch_asr = self.ui.btn_batch_asr
 
     def connect_signals(self):
         """连接所有信号槽"""
@@ -48,7 +60,14 @@ class ASRProcess(QWidget):
         self.chkbox_asrResultSave.stateChanged.connect(self.asr_result_save_state)
         self.btn_asrResultDirOpen.clicked.connect(self.open_asr_result_dir)
 
-    # [原MainProcess.py中的其他方法移到这里，保持不变]
+        self.combox_modelSelect_batch.currentIndexChanged.connect(self.model_init)
+        self.btn_batch_asr_inputDir_select.clicked.connect(self.select_batch_input_dir)
+        self.btn_batch_asr_outputDir_select.clicked.connect(self.select_batch_output_dir)
+        self.btn_batch_asr_inputDir_open.clicked.connect(self.open_batch_input_dir)
+        self.btn_batch_asr_outputDir_open.clicked.connect(self.open_batch_output_dir)
+        #self.btn_batch_asr.clicked.connect(self.batch_asr)
+        
+
     #设置模型ComboBox
     def setup_model_combobox(self):
         # 清空ComboBox
@@ -144,3 +163,39 @@ class ASRProcess(QWidget):
     #清除语音识别结果
     def clear_asr(self):
         self.txtEdit_result.clear()
+
+    def select_batch_input_dir(self):
+        """选择批量处理的输入目录"""
+        current_dir = self.lineEdit_batch_asr_inputDir.text()
+        success, result = self.file_controller.select_asr_save_directory(current_dir)
+        
+        if success:
+            self.lineEdit_batch_asr_inputDir.setText(result)
+        elif not isinstance(result, str):
+            QMessageBox.critical(self, "错误", result)
+
+    def select_batch_output_dir(self):
+        """选择批量处理的输出目录"""
+        current_dir = self.lineEdit_batch_asr_inputDir.text()
+        success, result = self.file_controller.select_asr_save_directory(current_dir)
+        
+        if success:
+            self.lineEdit_batch_asr_outputDir.setText(result)
+        elif not isinstance(result, str):
+            QMessageBox.critical(self, "错误", result)
+
+    def open_batch_input_dir(self):
+        """打开批量处理的输入目录"""
+        target_dir = self.lineEdit_batch_asr_inputDir.text()
+        success, error_msg = self.file_controller.open_asr_save_directory(target_dir)
+        
+        if not success:
+            QMessageBox.critical(self, "错误", error_msg)
+
+    def open_batch_output_dir(self):
+        """打开批量处理的输出目录"""
+        target_dir = self.lineEdit_batch_asr_outputDir.text()
+        success, error_msg = self.file_controller.open_asr_save_directory(target_dir)
+        
+        if not success:
+            QMessageBox.critical(self, "错误", error_msg)

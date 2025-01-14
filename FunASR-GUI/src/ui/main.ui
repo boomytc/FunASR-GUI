@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>808</width>
-    <height>687</height>
+    <width>830</width>
+    <height>748</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,377 +24,616 @@
        <attribute name="title">
         <string>语音识别</string>
        </attribute>
-       <widget class="QPushButton" name="btn_asr_clear">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>540</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>清除内容</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="btn_asr">
-        <property name="geometry">
-         <rect>
-          <x>380</x>
-          <y>540</y>
-          <width>81</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>开始识别</string>
-        </property>
-       </widget>
-       <widget class="QWidget" name="">
-        <property name="geometry">
-         <rect>
-          <x>12</x>
-          <y>2</y>
-          <width>771</width>
-          <height>531</height>
-         </rect>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QGroupBox" name="groupBox">
-             <property name="title">
-              <string>基础设置</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_2">
-              <item row="1" column="0">
-               <layout class="QHBoxLayout" name="horizontalLayout">
-                <item>
-                 <widget class="QPushButton" name="btn_upload_audio">
-                  <property name="maximumSize">
-                   <size>
-                    <width>120</width>
-                    <height>80</height>
-                   </size>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="1">
+         <widget class="QTabWidget" name="tabWidget_2">
+          <property name="currentIndex">
+           <number>1</number>
+          </property>
+          <widget class="QWidget" name="tab_single_asr">
+           <attribute name="title">
+            <string>单语音识别</string>
+           </attribute>
+           <widget class="QWidget" name="">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>771</width>
+              <height>531</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <item>
+                <widget class="QGroupBox" name="groupBox">
+                 <property name="title">
+                  <string>基础设置</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_2">
+                  <item row="1" column="0">
+                   <layout class="QHBoxLayout" name="horizontalLayout">
+                    <item>
+                     <widget class="QPushButton" name="btn_upload_audio">
+                      <property name="maximumSize">
+                       <size>
+                        <width>120</width>
+                        <height>80</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>上传</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_audioname">
+                      <property name="font">
+                       <font>
+                        <pointsize>10</pointsize>
+                        <italic>true</italic>
+                        <bold>false</bold>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>请上传需要识别的音频文件</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignmentFlag::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QComboBox" name="combox_modelSelect">
+                    <property name="font">
+                     <font>
+                      <italic>true</italic>
+                     </font>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>请选择语音识别模型</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="groupBox_2">
+                 <property name="title">
+                  <string>识别结果</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_3">
+                  <item row="0" column="0">
+                   <widget class="QTextEdit" name="txtEdit_result">
+                    <property name="readOnly">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="groupBox_3">
+               <property name="minimumSize">
+                <size>
+                 <width>300</width>
+                 <height>120</height>
+                </size>
+               </property>
+               <property name="title">
+                <string>进阶设置</string>
+               </property>
+               <widget class="QGroupBox" name="groupBox_4">
+                <property name="geometry">
+                 <rect>
+                  <x>20</x>
+                  <y>40</y>
+                  <width>100</width>
+                  <height>60</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>50</width>
+                  <height>60</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>80</height>
+                 </size>
+                </property>
+                <property name="title">
+                 <string>时间辍</string>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_4">
+                 <item row="0" column="0">
+                  <widget class="QRadioButton" name="radiobtn_timestampY">
+                   <property name="text">
+                    <string>是</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QRadioButton" name="radiobtn_timestampN">
+                   <property name="text">
+                    <string>否</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QGroupBox" name="groupBox_5">
+                <property name="geometry">
+                 <rect>
+                  <x>150</x>
+                  <y>40</y>
+                  <width>100</width>
+                  <height>60</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>50</width>
+                  <height>60</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>80</height>
+                 </size>
+                </property>
+                <property name="title">
+                 <string>说话人区分</string>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_5">
+                 <item row="0" column="0">
+                  <widget class="QRadioButton" name="radiobtn_spkY">
+                   <property name="text">
+                    <string>是</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QRadioButton" name="radiobtn_spkN">
+                   <property name="text">
+                    <string>否</string>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QFrame" name="frame">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="geometry">
+                 <rect>
+                  <x>10</x>
+                  <y>120</y>
+                  <width>281</width>
+                  <height>251</height>
+                 </rect>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::Shape::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Shadow::Raised</enum>
+                </property>
+                <widget class="QGroupBox" name="groupBox_asrSave">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>44</y>
+                   <width>261</width>
+                   <height>197</height>
+                  </rect>
+                 </property>
+                 <property name="title">
+                  <string>识别结果保存</string>
+                 </property>
+                 <widget class="QPushButton" name="btn_asrResultDirSelect">
+                  <property name="geometry">
+                   <rect>
+                    <x>170</x>
+                    <y>100</y>
+                    <width>89</width>
+                    <height>25</height>
+                   </rect>
                   </property>
                   <property name="text">
-                   <string>上传</string>
+                   <string>选择路径</string>
                   </property>
                  </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="label_audioname">
+                 <widget class="QGroupBox" name="groupBox_10">
+                  <property name="geometry">
+                   <rect>
+                    <x>10</x>
+                    <y>80</y>
+                    <width>129</width>
+                    <height>106</height>
+                   </rect>
+                  </property>
+                  <property name="title">
+                   <string>保存格式</string>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_2">
+                   <item>
+                    <widget class="QRadioButton" name="radioBtn_asrSaveTxtMode">
+                     <property name="text">
+                      <string>txt文本格式</string>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QRadioButton" name="radioBtn_asrSaveSrtMode">
+                     <property name="text">
+                      <string>srt字幕格式</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QPushButton" name="btn_asrResultDirOpen">
+                  <property name="geometry">
+                   <rect>
+                    <x>170</x>
+                    <y>130</y>
+                    <width>89</width>
+                    <height>25</height>
+                   </rect>
+                  </property>
+                  <property name="text">
+                   <string>打开路径</string>
+                  </property>
+                 </widget>
+                 <widget class="QLabel" name="lab_asrSaveMessage">
+                  <property name="geometry">
+                   <rect>
+                    <x>10</x>
+                    <y>60</y>
+                    <width>241</width>
+                    <height>17</height>
+                   </rect>
+                  </property>
                   <property name="font">
                    <font>
-                    <pointsize>10</pointsize>
                     <italic>true</italic>
-                    <bold>false</bold>
                    </font>
                   </property>
                   <property name="text">
-                   <string>请上传需要识别的音频文件</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignmentFlag::AlignCenter</set>
+                   <string/>
                   </property>
                  </widget>
-                </item>
-               </layout>
-              </item>
-              <item row="0" column="0">
-               <widget class="QComboBox" name="combox_modelSelect">
-                <property name="font">
-                 <font>
-                  <italic>true</italic>
-                 </font>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>请选择语音识别模型</string>
+                 <widget class="QWidget" name="">
+                  <property name="geometry">
+                   <rect>
+                    <x>10</x>
+                    <y>30</y>
+                    <width>251</width>
+                    <height>27</height>
+                   </rect>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_3">
+                   <item>
+                    <widget class="QLabel" name="label_2">
+                     <property name="text">
+                      <string>保存路径：</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="lineEdit_asrSavaDir"/>
+                   </item>
+                  </layout>
+                 </widget>
+                </widget>
+                <widget class="QCheckBox" name="chkbox_asrResultSave">
+                 <property name="enabled">
+                  <bool>true</bool>
                  </property>
-                </item>
+                 <property name="geometry">
+                  <rect>
+                   <x>10</x>
+                   <y>10</y>
+                   <width>121</width>
+                   <height>28</height>
+                  </rect>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>11</pointsize>
+                   <italic>true</italic>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>开启自动保存</string>
+                 </property>
+                </widget>
+               </widget>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QPushButton" name="btn_asr">
+            <property name="geometry">
+             <rect>
+              <x>330</x>
+              <y>550</y>
+              <width>81</width>
+              <height>31</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>开始识别</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="btn_asr_clear">
+            <property name="geometry">
+             <rect>
+              <x>220</x>
+              <y>550</y>
+              <width>81</width>
+              <height>31</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>清除内容</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="tab_batch_asr">
+           <attribute name="title">
+            <string>批量语音识别</string>
+           </attribute>
+           <widget class="QComboBox" name="combox_modelSelect_batch">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>421</width>
+              <height>25</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <italic>true</italic>
+             </font>
+            </property>
+            <item>
+             <property name="text">
+              <string>请选择语音识别模型</string>
+             </property>
+            </item>
+           </widget>
+           <widget class="QGroupBox" name="groupBox_9">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>50</y>
+              <width>251</width>
+              <height>111</height>
+             </rect>
+            </property>
+            <property name="title">
+             <string>模式选择</string>
+            </property>
+            <widget class="QGroupBox" name="groupBox_11">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>30</y>
+               <width>100</width>
+               <height>60</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>60</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>80</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>时间辍</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_7">
+              <item row="0" column="0">
+               <widget class="QRadioButton" name="radiobtn_timestampY_batch_asr">
+                <property name="text">
+                 <string>是</string>
+                </property>
                </widget>
               </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QGroupBox" name="groupBox_2">
-             <property name="title">
-              <string>识别结果</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_3">
-              <item row="0" column="0">
-               <widget class="QTextEdit" name="txtEdit_result">
-                <property name="readOnly">
+              <item row="0" column="1">
+               <widget class="QRadioButton" name="radiobtn_timestampN_batch_asr">
+                <property name="text">
+                 <string>否</string>
+                </property>
+                <property name="checked">
                  <bool>true</bool>
                 </property>
                </widget>
               </item>
              </layout>
             </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QGroupBox" name="groupBox_3">
-           <property name="minimumSize">
-            <size>
-             <width>300</width>
-             <height>120</height>
-            </size>
-           </property>
-           <property name="title">
-            <string>进阶设置</string>
-           </property>
-           <widget class="QGroupBox" name="groupBox_4">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>40</y>
-              <width>100</width>
-              <height>60</height>
-             </rect>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>50</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>100</width>
-              <height>80</height>
-             </size>
-            </property>
-            <property name="title">
-             <string>时间辍</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="0">
-              <widget class="QRadioButton" name="radiobtn_timestampY">
-               <property name="text">
-                <string>是</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QRadioButton" name="radiobtn_timestampN">
-               <property name="text">
-                <string>否</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QGroupBox" name="groupBox_5">
-            <property name="geometry">
-             <rect>
-              <x>150</x>
-              <y>40</y>
-              <width>100</width>
-              <height>60</height>
-             </rect>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>50</width>
-              <height>60</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>100</width>
-              <height>80</height>
-             </size>
-            </property>
-            <property name="title">
-             <string>说话人区分</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_5">
-             <item row="0" column="0">
-              <widget class="QRadioButton" name="radiobtn_spkY">
-               <property name="text">
-                <string>是</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QRadioButton" name="radiobtn_spkN">
-               <property name="text">
-                <string>否</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QFrame" name="frame">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="geometry">
-             <rect>
-              <x>10</x>
-              <y>120</y>
-              <width>281</width>
-              <height>251</height>
-             </rect>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Shape::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Shadow::Raised</enum>
-            </property>
-            <widget class="QGroupBox" name="groupBox_asrSave">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
+            <widget class="QGroupBox" name="groupBox_12">
              <property name="geometry">
               <rect>
-               <x>10</x>
-               <y>44</y>
-               <width>261</width>
-               <height>197</height>
+               <x>130</x>
+               <y>30</y>
+               <width>100</width>
+               <height>60</height>
               </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>60</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>80</height>
+              </size>
              </property>
              <property name="title">
-              <string>识别结果保存</string>
+              <string>说话人区分</string>
              </property>
-             <widget class="QPushButton" name="btn_asrResultDirSelect">
-              <property name="geometry">
-               <rect>
-                <x>170</x>
-                <y>100</y>
-                <width>89</width>
-                <height>25</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>选择路径</string>
-              </property>
-             </widget>
-             <widget class="QGroupBox" name="groupBox_10">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>80</y>
-                <width>129</width>
-                <height>106</height>
-               </rect>
-              </property>
-              <property name="title">
-               <string>保存格式</string>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_2">
-               <item>
-                <widget class="QRadioButton" name="radioBtn_asrSaveTxtMode">
-                 <property name="text">
-                  <string>txt文本格式</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioBtn_asrSaveSrtMode">
-                 <property name="text">
-                  <string>srt字幕格式</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QPushButton" name="btn_asrResultDirOpen">
-              <property name="geometry">
-               <rect>
-                <x>170</x>
-                <y>130</y>
-                <width>89</width>
-                <height>25</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>打开路径</string>
-              </property>
-             </widget>
-             <widget class="QLabel" name="lab_asrSaveMessage">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>60</y>
-                <width>241</width>
-                <height>17</height>
-               </rect>
-              </property>
-              <property name="font">
-               <font>
-                <italic>true</italic>
-               </font>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-             <widget class="QWidget" name="">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>30</y>
-                <width>251</width>
-                <height>27</height>
-               </rect>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_3">
-               <item>
-                <widget class="QLabel" name="label_2">
-                 <property name="text">
-                  <string>保存路径：</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="lineEdit_asrSavaDir"/>
-               </item>
-              </layout>
-             </widget>
-            </widget>
-            <widget class="QCheckBox" name="chkbox_asrResultSave">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>10</y>
-               <width>121</width>
-               <height>28</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>11</pointsize>
-               <italic>true</italic>
-              </font>
-             </property>
-             <property name="text">
-              <string>开启自动保存</string>
-             </property>
+             <layout class="QGridLayout" name="gridLayout_8">
+              <item row="0" column="0">
+               <widget class="QRadioButton" name="radiobtn_spkY_batch_asr">
+                <property name="text">
+                 <string>是</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QRadioButton" name="radiobtn_spkN_batch_asr">
+                <property name="text">
+                 <string>否</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </widget>
+           <widget class="QPushButton" name="btn_batch_asr">
+            <property name="geometry">
+             <rect>
+              <x>160</x>
+              <y>310</y>
+              <width>111</width>
+              <height>31</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>开始批量识别</string>
+            </property>
+           </widget>
+           <widget class="QWidget" name="">
+            <property name="geometry">
+             <rect>
+              <x>11</x>
+              <y>170</y>
+              <width>585</width>
+              <height>32</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>批量识别目录：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_batch_asr_inputDir">
+               <property name="minimumSize">
+                <size>
+                 <width>300</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btn_batch_asr_inputDir_select">
+               <property name="text">
+                <string>选择目录</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btn_batch_asr_inputDir_open">
+               <property name="text">
+                <string>打开目录</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="">
+            <property name="geometry">
+             <rect>
+              <x>11</x>
+              <y>220</y>
+              <width>585</width>
+              <height>32</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>识别结果目录：</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_batch_asr_outputDir">
+               <property name="minimumSize">
+                <size>
+                 <width>300</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btn_batch_asr_outputDir_select">
+               <property name="text">
+                <string>选择目录</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btn_batch_asr_outputDir_open">
+               <property name="text">
+                <string>打开目录</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </widget>
-         </item>
-        </layout>
-       </widget>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_tts">
        <attribute name="title">
@@ -467,23 +706,27 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>808</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>设置</string>
-    </property>
-   </widget>
-   <addaction name="menu"/>
-  </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="act_open_setting_file"/>
+  </widget>
+  <action name="act_open_setting_file">
+   <property name="text">
+    <string>配置文件</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
