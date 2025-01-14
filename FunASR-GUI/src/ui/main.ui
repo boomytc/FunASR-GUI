@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>705</width>
+    <width>808</width>
     <height>687</height>
    </rect>
   </property>
@@ -24,76 +24,6 @@
        <attribute name="title">
         <string>语音识别</string>
        </attribute>
-       <widget class="QGroupBox" name="groupBox">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>0</y>
-          <width>661</width>
-          <height>121</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>基础设置</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="0">
-          <widget class="QComboBox" name="combox_modelSelect">
-           <item>
-            <property name="text">
-             <string>请选择语音识别模型</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QPushButton" name="btn_upload_audio">
-             <property name="maximumSize">
-              <size>
-               <width>120</width>
-               <height>80</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>上传</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_audioname">
-             <property name="text">
-              <string>请上传需要识别的音频文件</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>310</y>
-          <width>661</width>
-          <height>211</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>识别结果</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_3">
-         <item row="0" column="0">
-          <widget class="QTextEdit" name="txtEdit_result">
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
        <widget class="QPushButton" name="btn_asr_clear">
         <property name="geometry">
          <rect>
@@ -107,83 +37,6 @@
          <string>清除内容</string>
         </property>
        </widget>
-       <widget class="QGroupBox" name="groupBox_3">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>120</y>
-          <width>661</width>
-          <height>181</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string>进阶设置</string>
-        </property>
-        <widget class="QGroupBox" name="groupBox_4">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>20</y>
-           <width>110</width>
-           <height>72</height>
-          </rect>
-         </property>
-         <property name="title">
-          <string>时间辍</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_4">
-          <item row="0" column="0">
-           <widget class="QRadioButton" name="radiobtn_timestampY">
-            <property name="text">
-             <string>是</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QRadioButton" name="radiobtn_timestampN">
-            <property name="text">
-             <string>否</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QGroupBox" name="groupBox_5">
-         <property name="geometry">
-          <rect>
-           <x>130</x>
-           <y>20</y>
-           <width>110</width>
-           <height>72</height>
-          </rect>
-         </property>
-         <property name="title">
-          <string>说话人区分</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_5">
-          <item row="0" column="0">
-           <widget class="QRadioButton" name="radiobtn_spkY">
-            <property name="text">
-             <string>是</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QRadioButton" name="radiobtn_spkN">
-            <property name="text">
-             <string>否</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </widget>
        <widget class="QPushButton" name="btn_asr">
         <property name="geometry">
          <rect>
@@ -196,6 +49,196 @@
         <property name="text">
          <string>开始识别</string>
         </property>
+       </widget>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>2</y>
+          <width>771</width>
+          <height>531</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QGroupBox" name="groupBox">
+             <property name="title">
+              <string>基础设置</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="1" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <item>
+                 <widget class="QPushButton" name="btn_upload_audio">
+                  <property name="maximumSize">
+                   <size>
+                    <width>120</width>
+                    <height>80</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>上传</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_audioname">
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <italic>true</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>请上传需要识别的音频文件</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="combox_modelSelect">
+                <property name="font">
+                 <font>
+                  <italic>true</italic>
+                 </font>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>请选择语音识别模型</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_2">
+             <property name="title">
+              <string>识别结果</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_3">
+              <item row="0" column="0">
+               <widget class="QTextEdit" name="txtEdit_result">
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_3">
+           <property name="minimumSize">
+            <size>
+             <width>300</width>
+             <height>120</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>进阶设置</string>
+           </property>
+           <widget class="QGroupBox" name="groupBox_4">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>40</y>
+              <width>100</width>
+              <height>60</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>60</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>时间辍</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_4">
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="radiobtn_timestampY">
+               <property name="text">
+                <string>是</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QRadioButton" name="radiobtn_timestampN">
+               <property name="text">
+                <string>否</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QGroupBox" name="groupBox_5">
+            <property name="geometry">
+             <rect>
+              <x>150</x>
+              <y>40</y>
+              <width>100</width>
+              <height>60</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>60</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>说话人区分</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_5">
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="radiobtn_spkY">
+               <property name="text">
+                <string>是</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QRadioButton" name="radiobtn_spkN">
+               <property name="text">
+                <string>否</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </widget>
       <widget class="QWidget" name="tab_tts">
@@ -260,6 +303,11 @@
         <string>音视频处理</string>
        </attribute>
       </widget>
+      <widget class="QWidget" name="tab_asrModelCompare">
+       <attribute name="title">
+        <string>模型对比</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -269,7 +317,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>705</width>
+     <width>808</width>
      <height>27</height>
     </rect>
    </property>

@@ -36,10 +36,6 @@ class MainProcess(QMainWindow, Ui_MainWindow):
         self.btn_upload_audio.clicked.connect(self.upload_audio)
         self.btn_asr.clicked.connect(self.asr)
         self.btn_asr_clear.clicked.connect(self.clear_asr)
-        self.radiobtn_timestampY.clicked.connect(self.timestamp_mode)
-        self.radiobtn_timestampN.clicked.connect(self.timestamp_mode)
-        self.radiobtn_spkY.clicked.connect(self.spk_mode)
-        self.radiobtn_spkN.clicked.connect(self.spk_mode)
 
     #设置模型ComboBox
     def setup_model_combobox(self):
@@ -99,17 +95,3 @@ class MainProcess(QMainWindow, Ui_MainWindow):
     #清除语音识别结果
     def clear_asr(self):
         self.txtEdit_result.clear()
-
-    #设置时间戳模式
-    def timestamp_mode(self):
-        if self.radiobtn_timestampY.isChecked():
-            pass
-        elif self.radiobtn_timestampN.isChecked():
-            pass
-
-    #设置说话人模式
-    def spk_mode(self):
-        if self.radiobtn_spkY.isChecked():
-            pass
-        elif self.radiobtn_spkN.isChecked():
-            pass
