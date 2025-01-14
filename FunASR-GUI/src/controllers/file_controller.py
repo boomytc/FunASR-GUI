@@ -57,22 +57,29 @@ class FileController:
     def select_asr_result_dir(self):
         pass
     
-    #保存识别结果到指定目录(result: 识别结果文本 | save_dir: 保存目录 | save_mode: 保存模式 ('txt' 或 'srt') | 返回值：tuple[bool, str]: 是否成功, 成功或错误信息)
-    def save_asr_result(self, result: str, save_dir: str, save_mode: str) -> Tuple[bool, str]:
+    def save_asr_result(self, result: str, save_dir: str, save_mode: str, base_name: str = None) -> Tuple[bool, str]:
+        """保存识别结果到指定目录
+        Args:
+            result: 识别结果文本
+            save_dir: 保存目录
+            save_mode: 保存模式 ('txt' 或 'srt')
+            base_name: 指定的文件名（不含扩展名），如果为None则使用原始文件名
+        Returns:
+            tuple[bool, str]: 是否成功, 成功或错误信息
+        """
         try:
-            if not self.original_filename:
+            if not base_name and not self.original_filename:
                 return False, "没有原始文件名信息"
             
             if not os.path.exists(save_dir):
                 return False, "保存目录不存在"
             
-            # 获取原始文件名（不含扩展名）
-            base_name = os.path.splitext(self.original_filename)[0]
+            # 获取文件名（不含扩展名）
+            file_base_name = base_name if base_name else os.path.splitext(self.original_filename)[0]
             
             # 根据保存模式设置文件扩展名和处理内容
             if save_mode == 'txt':
                 # 处理纯文本模式：移除时间戳和说话人信息
-                # 通过分行处理，只保留实际文本内容
                 lines = result.split('\n')
                 text_only = []
                 for line in lines:
@@ -90,14 +97,13 @@ class FileController:
                         line = line[line.find(']')+1:].strip()
                     text_only.append(line)
                 
-                # 合并处理后的文本
                 content = '\n'.join(text_only)
-                file_path = os.path.join(save_dir, f"{base_name}.txt")
+                file_path = os.path.join(save_dir, f"{file_base_name}.txt")
                 
             elif save_mode == 'srt':
                 # SRT模式：直接使用完整结果
                 content = result
-                file_path = os.path.join(save_dir, f"{base_name}.srt")
+                file_path = os.path.join(save_dir, f"{file_base_name}.srt")
                 
             else:
                 return False, "无效的保存模式"
@@ -106,10 +112,11 @@ class FileController:
             with open(file_path, 'w', encoding='utf-8') as f:
                 f.write(content)
             
-            return True, f"结果已保存至: {file_path}"
-            
+            return True, file_path
+        
         except Exception as e:
             return False, f"保存失败：{str(e)}"
+
 
     #选择ASR结果保存目录(current_dir: 当前设置的目录路径 | 返回值：tuple[bool, str]: 是否成功选择了新目录, 选择的目录路径或保持原有路径)
     def select_asr_save_directory(self, current_dir: str = "") -> Tuple[bool, str]:
@@ -174,5 +181,33 @@ class FileController:
         return os.path.expanduser('~')  # 如果没有音频文件，返回用户主目录
 
     def cleanup(self):
+        """清理临时文件"""
+        FFmpegUtils._cleanup_temp_files()
+
+    def process_audio_file(self, audio_file: str) -> Tuple[bool, Optional[str]]:
+        """处理单个音频文件
+        Returns:
+            Tuple[bool, str]: (是否成功, 处理后的文件路径或错误信息)
+        """
+        try:
+            success, result = FFmpegUtils.convert_to_wav(audio_file)
+            if success:
+                return True, result
+            return False, result
+        except Exception as e:
+            return False, f"音频处理失败：{str(e)}"
+
+    def get_audio_files_in_directory(self, directory: str) -> list:
+        """获取目录中的所有支持的音频文件
+        Returns:
+            list: 音频文件路径列表
+        """
+        audio_files = []
+        for file in os.listdir(directory):
+            if file.lower().endswith(('.mp3', '.wav', '.m4a', '.flac', '.ogg', '.aac')):
+                audio_files.append(os.path.join(directory, file))
+        return audio_files
+
+    def cleanup_temp_file(self):
         """清理临时文件"""
         FFmpegUtils._cleanup_temp_files()

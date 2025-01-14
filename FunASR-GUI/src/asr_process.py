@@ -2,6 +2,7 @@ from PySide6.QtWidgets import QWidget, QMessageBox
 import os
 from controllers.model_controller import ASRModelController
 from controllers.file_controller import FileController
+from utils.ffmpeg_utils import FFmpegUtils
 
 class ASRProcess(QWidget):
     def __init__(self, parent=None):
@@ -49,10 +50,19 @@ class ASRProcess(QWidget):
         self.lineEdit_batch_asr_outputDir = self.ui.lineEdit_batch_asr_outputDir
         self.btn_batch_asr_outputDir_open = self.ui.btn_batch_asr_outputDir_open
         self.btn_batch_asr = self.ui.btn_batch_asr
+        self.radioBtn_batch_asrSaveTxtMode = self.ui.radioBtn_batch_asrSaveTxtMode
+        self.radioBtn_batch_asrSaveSrtMode = self.ui.radioBtn_batch_asrSaveSrtMode
+        self.radiobtn_timestampY_batch_asr = self.ui.radiobtn_timestampY_batch_asr
+        self.radiobtn_spkY_batch_asr = self.ui.radiobtn_spkY_batch_asr
+        self.plainTextEdit_batch_asr_result = self.ui.plainTextEdit_batch_asr_result
+        self.statusbar = self.ui.statusbar
 
     def connect_signals(self):
         """连接所有信号槽"""
-        self.combox_modelSelect.currentIndexChanged.connect(self.model_init)
+        # 为每个 ComboBox 连接到不同的初始化方法
+        self.combox_modelSelect.currentIndexChanged.connect(self.model_init_single)
+        self.combox_modelSelect_batch.currentIndexChanged.connect(self.model_init_batch)
+        
         self.btn_upload_audio.clicked.connect(self.upload_audio)
         self.btn_asr.clicked.connect(self.asr)
         self.btn_asr_clear.clicked.connect(self.clear_asr)
@@ -60,28 +70,37 @@ class ASRProcess(QWidget):
         self.chkbox_asrResultSave.stateChanged.connect(self.asr_result_save_state)
         self.btn_asrResultDirOpen.clicked.connect(self.open_asr_result_dir)
 
-        self.combox_modelSelect_batch.currentIndexChanged.connect(self.model_init)
         self.btn_batch_asr_inputDir_select.clicked.connect(self.select_batch_input_dir)
         self.btn_batch_asr_outputDir_select.clicked.connect(self.select_batch_output_dir)
         self.btn_batch_asr_inputDir_open.clicked.connect(self.open_batch_input_dir)
         self.btn_batch_asr_outputDir_open.clicked.connect(self.open_batch_output_dir)
-        #self.btn_batch_asr.clicked.connect(self.batch_asr)
+        self.btn_batch_asr.clicked.connect(self.batch_asr)
         
 
     #设置模型ComboBox
     def setup_model_combobox(self):
+        """设置模型ComboBox"""
         # 清空ComboBox
         self.combox_modelSelect.clear()
+        self.combox_modelSelect_batch.clear()
+        
         # 添加一个空选项
         self.combox_modelSelect.addItem("")
+        self.combox_modelSelect_batch.addItem("")
+        
         # 从控制器获取模型列表
-        self.combox_modelSelect.addItems(self.model_controller.get_model_names())
+        model_names = self.model_controller.get_model_names()
+        self.combox_modelSelect.addItems(model_names)
+        self.combox_modelSelect_batch.addItems(model_names)
 
-    #模型初始化
-    def model_init(self):
-        # 获取当前选择的模型名称
+    def model_init_single(self, index):
+        """单文件处理的模型初始化"""
         current_model = self.combox_modelSelect.currentText()
-        # 使用控制器初始化模型
+        self.model_controller.initialize_model(current_model)
+
+    def model_init_batch(self, index):
+        """批处理的模型初始化"""
+        current_model = self.combox_modelSelect_batch.currentText()
         self.model_controller.initialize_model(current_model)
 
     #处理音频文件上传
@@ -199,3 +218,97 @@ class ASRProcess(QWidget):
         
         if not success:
             QMessageBox.critical(self, "错误", error_msg)
+
+    def batch_asr(self):
+        """批量处理语音识别"""
+        input_dir = self.lineEdit_batch_asr_inputDir.text()
+        output_dir = self.lineEdit_batch_asr_outputDir.text()
+        
+        # 检查目录是否存在
+        if not input_dir or not os.path.exists(input_dir):
+            self.plainTextEdit_batch_asr_result.setPlainText("错误：请选择有效的输入目录！")
+            return
+        if not output_dir or not os.path.exists(output_dir):
+            self.plainTextEdit_batch_asr_result.setPlainText("错误：请选择有效的输出目录！")
+            return
+        
+        # 获取音频文件列表
+        audio_files = self.file_controller.get_audio_files_in_directory(input_dir)
+        if not audio_files:
+            self.plainTextEdit_batch_asr_result.setPlainText("错误：输入目录中没有找到支持的音频文件！")
+            return
+        
+        # 获取保存模式和设置
+        save_mode = 'txt' if self.radioBtn_batch_asrSaveTxtMode.isChecked() else 'srt'
+        use_timestamp = self.radiobtn_timestampY_batch_asr.isChecked()
+        distinguish_speaker = self.radiobtn_spkY_batch_asr.isChecked()
+        
+        # 初始化进度显示
+        self.plainTextEdit_batch_asr_result.clear()
+        self.plainTextEdit_batch_asr_result.appendPlainText("开始处理音频文件...\n")
+        
+        # 处理每个音频文件
+        processed_count = 0
+        failed_files = []
+        total_files = len(audio_files)
+        
+        for index, audio_file in enumerate(audio_files, 1):
+            file_name = os.path.basename(audio_file)
+            self.plainTextEdit_batch_asr_result.appendPlainText(f"正在处理 ({index}/{total_files}): {file_name}")
+            
+            try:
+                # 处理音频文件
+                success, converted_file = self.file_controller.process_audio_file(audio_file)
+                if not success:
+                    error_msg = f"✘ {file_name}: 音频转换失败"
+                    failed_files.append((file_name, "音频转换失败"))
+                    self.plainTextEdit_batch_asr_result.appendPlainText(error_msg)
+                    continue
+                
+                # 执行语音识别
+                success, result = self.model_controller.perform_asr(
+                    converted_file,
+                    use_timestamp=use_timestamp,
+                    distinguish_speaker=distinguish_speaker
+                )
+                
+                if success:
+                    # 保存识别结果
+                    base_name = os.path.splitext(file_name)[0]
+                    save_success, save_msg = self.file_controller.save_asr_result(
+                        result, 
+                        output_dir,
+                        save_mode,
+                        base_name
+                    )
+                    
+                    if save_success:
+                        processed_count += 1
+                        self.plainTextEdit_batch_asr_result.appendPlainText(f"✓ {file_name}: 处理成功")
+                    else:
+                        error_msg = f"✘ {file_name}: 保存失败 - {save_msg}"
+                        failed_files.append((file_name, f"保存失败：{save_msg}"))
+                        self.plainTextEdit_batch_asr_result.appendPlainText(error_msg)
+                else:
+                    error_msg = f"✘ {file_name}: 识别失败 - {result}"
+                    failed_files.append((file_name, f"识别失败：{result}"))
+                    self.plainTextEdit_batch_asr_result.appendPlainText(error_msg)
+                
+            except Exception as e:
+                error_msg = f"✘ {file_name}: 处理异常 - {str(e)}"
+                failed_files.append((file_name, f"处理异常：{str(e)}"))
+                self.plainTextEdit_batch_asr_result.appendPlainText(error_msg)
+            
+            finally:
+                # 清理临时文件
+                self.file_controller.cleanup_temp_file()
+                self.plainTextEdit_batch_asr_result.appendPlainText("")  # 添加空行
+        
+        # 显示处理结果摘要
+        summary = f"\n处理完成！\n成功处理：{processed_count}/{total_files} 个文件"
+        if failed_files:
+            summary += "\n\n失败文件列表："
+            for file, error in failed_files:
+                summary += f"\n{file}: {error}"
+        
+        self.plainTextEdit_batch_asr_result.appendPlainText(summary)
