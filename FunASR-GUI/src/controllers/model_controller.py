@@ -10,6 +10,7 @@ class ASRModelController:
     #初始化ASR模型控制器(parent_widget: 父级窗口部件，用于显示消息框)
     def __init__(self, parent_widget=None):
         self.parent_widget = parent_widget
+        self.ui_state_manager = parent_widget.ui_state_manager if parent_widget else None
         
         self.model_manager = ASRModelManager()
         self.loading_thread = None
@@ -26,38 +27,34 @@ class ASRModelController:
             self.loading_thread.terminate()
             self.loading_thread.wait()
 
-        if self.parent_widget:
-            self.parent_widget.statusbar.showMessage(f"正在加载模型 {model_name} 中......")
+        if self.ui_state_manager:
+            self.ui_state_manager.status_message_changed.emit(f"正在加载模型 {model_name} 中......")
             # 禁用相关控件
-            self.disable_controls()
+            self.ui_state_manager.asr_controls_state_changed.emit(False)
+            self.ui_state_manager.batch_controls_state_changed.emit(False)
 
         self.loading_thread = ModelLoadingThread(self.model_manager, model_name)
         self.loading_thread.finished.connect(self.on_model_loaded)
         self.loading_thread.start()
 
     def on_model_loaded(self, success: bool, message: str):
-        if self.parent_widget:
-            self.parent_widget.statusbar.showMessage(message)
+        if self.ui_state_manager:
+            self.ui_state_manager.status_message_changed.emit(message)
             # 重新启用控件
-            self.enable_controls()
+            self.ui_state_manager.asr_controls_state_changed.emit(True)
+            self.ui_state_manager.batch_controls_state_changed.emit(True)
 
     def disable_controls(self):
         """禁用相关控件"""
-        if self.parent_widget:
-            # 禁用所有需要等待模型加载的控件
-            self.parent_widget.btn_asr.setEnabled(False)
-            self.parent_widget.btn_batch_asr.setEnabled(False)
-            self.parent_widget.combox_modelSelect.setEnabled(False)
-            self.parent_widget.combox_modelSelect_batch.setEnabled(False)
+        if self.ui_state_manager:
+            self.ui_state_manager.asr_controls_state_changed.emit(False)
+            self.ui_state_manager.batch_controls_state_changed.emit(False)
 
     def enable_controls(self):
         """重新启用控件"""
-        if self.parent_widget:
-            # 重新启用所有控件
-            self.parent_widget.btn_asr.setEnabled(True)
-            self.parent_widget.btn_batch_asr.setEnabled(True)
-            self.parent_widget.combox_modelSelect.setEnabled(True)
-            self.parent_widget.combox_modelSelect_batch.setEnabled(True)
+        if self.ui_state_manager:
+            self.ui_state_manager.asr_controls_state_changed.emit(True)
+            self.ui_state_manager.batch_controls_state_changed.emit(True)
 
     #获取当前已初始化的模型名称(str: 已初始化的模型名称 | None: 未初始化)
     def get_initialized_model(self) -> Optional[str]:

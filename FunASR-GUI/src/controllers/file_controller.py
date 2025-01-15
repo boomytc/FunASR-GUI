@@ -9,6 +9,7 @@ class FileController:
     #初始化文件控制器(parent_widget: 父级窗口部件，用于显示对话框和消息框)
     def __init__(self, parent_widget=None):
         self.parent_widget = parent_widget
+        self.ui_state_manager = parent_widget.ui_state_manager if parent_widget else None
         self.current_audio_path = None  # 当前处理后的音频文件路径
         self.original_filename = None   # 原始文件名
 
@@ -17,7 +18,7 @@ class FileController:
         try:
             # 打开文件选择对话框
             file_path, _ = QFileDialog.getOpenFileName(
-                self.parent_widget,
+                self.ui_state_manager.main_window if self.ui_state_manager else None,
                 "选择音频文件",
                 "",
                 "音频文件 (*.mp3 *.wav *.m4a *.flac *.ogg *.aac)"
@@ -130,7 +131,7 @@ class FileController:
             
             # 打开目录选择对话框
             save_dir = QFileDialog.getExistingDirectory(
-                self.parent_widget,
+                self.ui_state_manager.main_window if self.ui_state_manager else None,
                 "选择保存目录",
                 default_dir
             )
