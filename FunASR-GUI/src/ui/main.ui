@@ -28,13 +28,13 @@
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabWidget_2">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_single_asr">
            <attribute name="title">
             <string>单语音识别</string>
            </attribute>
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -341,7 +341,7 @@
                    <string/>
                   </property>
                  </widget>
-                 <widget class="QWidget" name="">
+                 <widget class="QWidget" name="layoutWidget">
                   <property name="geometry">
                    <rect>
                     <x>10</x>
@@ -435,13 +435,13 @@
              <string>开始批量识别</string>
             </property>
            </widget>
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>100</x>
               <y>0</y>
               <width>587</width>
-              <height>541</height>
+              <height>607</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
