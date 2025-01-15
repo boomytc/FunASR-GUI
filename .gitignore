@@ -16,6 +16,7 @@ __pycache__/
 *.pyo
 *.pyd
 *.log
+*.ini
 
 #忽略模型文件
 models/
