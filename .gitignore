@@ -25,3 +25,4 @@ config.ini
 models/
 pretrained_models/
 .DS_Store
+.venv
