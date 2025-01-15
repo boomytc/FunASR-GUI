@@ -3,6 +3,7 @@ import numpy as np
 import torch
 from utils.content_processer import TextProcessor
 
+#语音识别模型推理
 class ASRInference:
     @staticmethod
     def format_timestamp(ms):
@@ -89,12 +90,16 @@ class ASRInference:
         # 处理音频
         waveform = ASRInference.process_audio(audio_path)
         
+        # 获取可用的GPU数量
+        gpu_count = torch.cuda.device_count()
+        use_gpu = gpu_count > 0
+        
         # 配置推理参数
         inference_config = {
-            "batch_size_s": 360,
-            "num_workers": 13,
-            "use_gpu": False,
-            "device_id": -1,
+            "batch_size_s": 3000,
+            "num_workers": 4,
+            "use_gpu": use_gpu,
+            "device_id": list(range(gpu_count)) if use_gpu else -1,  # 使用所有可用GPU
             "cache_size": 204800,
             "chunk_size": 1600,
             "language": "zh",
@@ -125,5 +130,6 @@ class ASRInference:
         if hasattr(torch.cuda, 'empty_cache'):
             torch.cuda.empty_cache()
 
+#语音合成模型推理
 class TTSInference:
     pass

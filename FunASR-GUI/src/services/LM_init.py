@@ -3,6 +3,7 @@ import torch
 from funasr import AutoModel
 from PySide6.QtCore import QSettings
 
+#语音识别模型管理器
 class ASRModelManager:
     def __init__(self):
         # 使用 QSettings 读取配置
@@ -110,6 +111,7 @@ class ASRModelManager:
         """获取当前已初始化的模型名称"""
         return self.current_model_name
 
+#语音合成模型管理器
 class TTSModelManager:
     def __init__(self):
         self.settings = QSettings('FunASR', 'FunASR-GUI')

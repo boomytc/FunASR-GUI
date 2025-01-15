@@ -8,19 +8,17 @@ class ASRModelController:
     #初始化ASR模型控制器(parent_widget: 父级窗口部件，用于显示消息框)
     def __init__(self, parent_widget=None):
         self.parent_widget = parent_widget
-        # 在控制器中创建模型管理器实例
+        
         self.model_manager = ASRModelManager()
 
     #初始化指定的ASR模型(model_name: 要初始化的模型名称 | bool: 初始化是否成功)
     def initialize_model(self, model_name: str) -> bool:
         if not model_name:
             return False
-            
+    
         try:
-            # 初始化模型
             self.model_manager.init_model(model_name)
             
-            # 显示成功提示
             if self.parent_widget:
                 QMessageBox.information(
                     self.parent_widget,
@@ -30,7 +28,6 @@ class ASRModelController:
             return True
             
         except Exception as e:
-            # 显示错误信息
             if self.parent_widget:
                 QMessageBox.critical(
                     self.parent_widget,
