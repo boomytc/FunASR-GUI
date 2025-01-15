@@ -1,6 +1,7 @@
 import torchaudio
 import numpy as np
 import torch
+from utils.content_processer import TextProcessor
 
 class ASRInference:
     @staticmethod
@@ -46,34 +47,38 @@ class ASRInference:
             if 'sentence_info' in result:
                 for sentence in result['sentence_info']:
                     speaker = f"[spk{sentence.get('spk', 'unknown')}]" if distinguish_speaker else ""
-                    text = sentence.get('text', '').rstrip(',.。，!！?？')  # 去除句尾标点
+                    text = TextProcessor.remove_punctuation(sentence.get('text', ''))
                     start_time = ASRInference.format_timestamp(sentence.get('start', 0))
                     end_time = ASRInference.format_timestamp(sentence.get('end', 0))
                     
-                    formatted_results.append(str(subtitle_index))
-                    formatted_results.append(f"{start_time} --> {end_time}")
-                    formatted_results.append(f"{speaker} {text}")
-                    formatted_results.append("")
+                    speaker_text = TextProcessor.format_speaker_text(speaker, text)
+                    formatted_results.extend(
+                        TextProcessor.format_subtitle_block(subtitle_index, start_time, end_time, speaker_text)
+                    )
                     subtitle_index += 1
                     
             elif 'timestamp' in result:
                 speaker = f"[spk{result.get('spk', 'unknown')}]" if distinguish_speaker else ""
-                text = result.get('text', '').rstrip(',.。，!！?？')  # 去除句尾标点
+                text = TextProcessor.remove_punctuation(result.get('text', ''))
                 
                 for ts in result['timestamp']:
                     start_time = ASRInference.format_timestamp(ts[0])
                     end_time = ASRInference.format_timestamp(ts[1])
                     
-                    formatted_results.append(str(subtitle_index))
-                    formatted_results.append(f"{start_time} --> {end_time}")
-                    formatted_results.append(f"{speaker} {text}")
-                    formatted_results.append("")
+                    speaker_text = TextProcessor.format_speaker_text(speaker, text)
+                    formatted_results.extend(
+                        TextProcessor.format_subtitle_block(subtitle_index, start_time, end_time, speaker_text)
+                    )
                     subtitle_index += 1
             else:
-                formatted_results.append(str(subtitle_index))
-                formatted_results.append("00:00:00,000 --> 00:00:00,000")
-                formatted_results.append(result.get('text', ''))
-                formatted_results.append("")
+                formatted_results.extend(
+                    TextProcessor.format_subtitle_block(
+                        subtitle_index,
+                        "00:00:00,000",
+                        "00:00:00,000",
+                        result.get('text', '')
+                    )
+                )
                 subtitle_index += 1
                 
         return "\n".join(formatted_results)
