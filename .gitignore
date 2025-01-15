@@ -5,6 +5,9 @@ LMInit/.DS_Store
 Include/
 Lib/
 Scripts/
+bin/
+include/
+lib/
 pyvenv.cfg
 
 # 通用的忽略规则
@@ -13,3 +16,7 @@ __pycache__/
 *.pyo
 *.pyd
 *.log
+
+#忽略模型文件
+models/
+pretrained_models/
