@@ -23,3 +23,4 @@ config.ini
 #忽略模型文件
 models/
 pretrained_models/
+.DS_Store
