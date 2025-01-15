@@ -26,3 +26,4 @@ models/
 pretrained_models/
 .DS_Store
 .venv
+FunASR-GUI/config.ini

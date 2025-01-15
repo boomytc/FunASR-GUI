@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(830, 748)
+        MainWindow.resize(978, 811)
         self.act_open_setting_file = QAction(MainWindow)
         self.act_open_setting_file.setObjectName(u"act_open_setting_file")
         self.act_open_setting_file.setMenuRole(QAction.MenuRole.NoRole)
@@ -44,15 +44,13 @@ class Ui_MainWindow(object):
         self.tabWidget_2.setObjectName(u"tabWidget_2")
         self.tab_single_asr = QWidget()
         self.tab_single_asr.setObjectName(u"tab_single_asr")
-        self.widget = QWidget(self.tab_single_asr)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(0, 0, 781, 541))
-        self.horizontalLayout_2 = QHBoxLayout(self.widget)
+        self.gridLayout_11 = QGridLayout(self.tab_single_asr)
+        self.gridLayout_11.setObjectName(u"gridLayout_11")
+        self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.groupBox = QGroupBox(self.widget)
+        self.groupBox = QGroupBox(self.tab_single_asr)
         self.groupBox.setObjectName(u"groupBox")
         self.gridLayout_2 = QGridLayout(self.groupBox)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
@@ -90,7 +88,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.groupBox)
 
-        self.groupBox_2 = QGroupBox(self.widget)
+        self.groupBox_2 = QGroupBox(self.tab_single_asr)
         self.groupBox_2.setObjectName(u"groupBox_2")
         self.groupBox_2.setMinimumSize(QSize(300, 0))
         self.gridLayout_3 = QGridLayout(self.groupBox_2)
@@ -107,7 +105,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addLayout(self.verticalLayout)
 
-        self.groupBox_3 = QGroupBox(self.widget)
+        self.groupBox_3 = QGroupBox(self.tab_single_asr)
         self.groupBox_3.setObjectName(u"groupBox_3")
         self.groupBox_3.setMinimumSize(QSize(300, 120))
         self.groupBox_3.setMaximumSize(QSize(200, 1200))
@@ -183,19 +181,21 @@ class Ui_MainWindow(object):
         self.lab_asrSaveMessage.setObjectName(u"lab_asrSaveMessage")
         self.lab_asrSaveMessage.setGeometry(QRect(10, 60, 241, 17))
         self.lab_asrSaveMessage.setFont(font1)
-        self.widget1 = QWidget(self.groupBox_asrSave)
-        self.widget1.setObjectName(u"widget1")
-        self.widget1.setGeometry(QRect(10, 30, 251, 27))
-        self.horizontalLayout_3 = QHBoxLayout(self.widget1)
+        self.widget = QWidget(self.groupBox_asrSave)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(22, 31, 221, 31))
+        self.horizontalLayout_3 = QHBoxLayout(self.widget)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.label_2 = QLabel(self.widget1)
+        self.label_2 = QLabel(self.widget)
         self.label_2.setObjectName(u"label_2")
+        self.label_2.setMaximumSize(QSize(60, 16777215))
 
         self.horizontalLayout_3.addWidget(self.label_2)
 
-        self.lineEdit_asrSavaDir = QLineEdit(self.widget1)
+        self.lineEdit_asrSavaDir = QLineEdit(self.widget)
         self.lineEdit_asrSavaDir.setObjectName(u"lineEdit_asrSavaDir")
+        self.lineEdit_asrSavaDir.setMaximumSize(QSize(160, 16777215))
 
         self.horizontalLayout_3.addWidget(self.lineEdit_asrSavaDir)
 
@@ -210,25 +210,32 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.groupBox_3)
 
-        self.btn_asr = QPushButton(self.tab_single_asr)
-        self.btn_asr.setObjectName(u"btn_asr")
-        self.btn_asr.setGeometry(QRect(330, 550, 81, 31))
+
+        self.gridLayout_11.addLayout(self.horizontalLayout_2, 0, 0, 1, 1)
+
+        self.horizontalLayout_7 = QHBoxLayout()
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.btn_asr_clear = QPushButton(self.tab_single_asr)
         self.btn_asr_clear.setObjectName(u"btn_asr_clear")
-        self.btn_asr_clear.setGeometry(QRect(220, 550, 81, 31))
+
+        self.horizontalLayout_7.addWidget(self.btn_asr_clear)
+
+        self.btn_asr = QPushButton(self.tab_single_asr)
+        self.btn_asr.setObjectName(u"btn_asr")
+
+        self.horizontalLayout_7.addWidget(self.btn_asr)
+
+
+        self.gridLayout_11.addLayout(self.horizontalLayout_7, 1, 0, 1, 1)
+
         self.tabWidget_2.addTab(self.tab_single_asr, "")
         self.tab_batch_asr = QWidget()
         self.tab_batch_asr.setObjectName(u"tab_batch_asr")
-        self.btn_batch_asr = QPushButton(self.tab_batch_asr)
-        self.btn_batch_asr.setObjectName(u"btn_batch_asr")
-        self.btn_batch_asr.setGeometry(QRect(310, 550, 111, 31))
-        self.widget2 = QWidget(self.tab_batch_asr)
-        self.widget2.setObjectName(u"widget2")
-        self.widget2.setGeometry(QRect(100, 0, 587, 541))
-        self.verticalLayout_4 = QVBoxLayout(self.widget2)
+        self.gridLayout_10 = QGridLayout(self.tab_batch_asr)
+        self.gridLayout_10.setObjectName(u"gridLayout_10")
+        self.verticalLayout_4 = QVBoxLayout()
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.combox_modelSelect_batch = QComboBox(self.widget2)
+        self.combox_modelSelect_batch = QComboBox(self.tab_batch_asr)
         self.combox_modelSelect_batch.addItem("")
         self.combox_modelSelect_batch.setObjectName(u"combox_modelSelect_batch")
         self.combox_modelSelect_batch.setFont(font1)
@@ -237,12 +244,13 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_6 = QHBoxLayout()
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.groupBox_9 = QGroupBox(self.widget2)
+        self.groupBox_9 = QGroupBox(self.tab_batch_asr)
         self.groupBox_9.setObjectName(u"groupBox_9")
         self.groupBox_9.setMaximumSize(QSize(250, 16777215))
+        self.gridLayout_9 = QGridLayout(self.groupBox_9)
+        self.gridLayout_9.setObjectName(u"gridLayout_9")
         self.groupBox_11 = QGroupBox(self.groupBox_9)
         self.groupBox_11.setObjectName(u"groupBox_11")
-        self.groupBox_11.setGeometry(QRect(10, 30, 100, 60))
         self.groupBox_11.setMinimumSize(QSize(50, 60))
         self.groupBox_11.setMaximumSize(QSize(100, 80))
         self.gridLayout_7 = QGridLayout(self.groupBox_11)
@@ -258,9 +266,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_7.addWidget(self.radiobtn_timestampN_batch_asr, 0, 1, 1, 1)
 
+
+        self.gridLayout_9.addWidget(self.groupBox_11, 0, 0, 1, 1)
+
         self.groupBox_12 = QGroupBox(self.groupBox_9)
         self.groupBox_12.setObjectName(u"groupBox_12")
-        self.groupBox_12.setGeometry(QRect(130, 30, 100, 60))
         self.groupBox_12.setMinimumSize(QSize(50, 60))
         self.groupBox_12.setMaximumSize(QSize(100, 80))
         self.gridLayout_8 = QGridLayout(self.groupBox_12)
@@ -277,9 +287,12 @@ class Ui_MainWindow(object):
         self.gridLayout_8.addWidget(self.radiobtn_spkN_batch_asr, 0, 1, 1, 1)
 
 
+        self.gridLayout_9.addWidget(self.groupBox_12, 0, 1, 1, 1)
+
+
         self.horizontalLayout_6.addWidget(self.groupBox_9)
 
-        self.groupBox_13 = QGroupBox(self.widget2)
+        self.groupBox_13 = QGroupBox(self.tab_batch_asr)
         self.groupBox_13.setObjectName(u"groupBox_13")
         self.groupBox_13.setMaximumSize(QSize(150, 16777215))
         self.verticalLayout_3 = QVBoxLayout(self.groupBox_13)
@@ -303,23 +316,23 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_4 = QHBoxLayout()
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.label_3 = QLabel(self.widget2)
+        self.label_3 = QLabel(self.tab_batch_asr)
         self.label_3.setObjectName(u"label_3")
 
         self.horizontalLayout_4.addWidget(self.label_3)
 
-        self.lineEdit_batch_asr_inputDir = QLineEdit(self.widget2)
+        self.lineEdit_batch_asr_inputDir = QLineEdit(self.tab_batch_asr)
         self.lineEdit_batch_asr_inputDir.setObjectName(u"lineEdit_batch_asr_inputDir")
         self.lineEdit_batch_asr_inputDir.setMinimumSize(QSize(300, 0))
 
         self.horizontalLayout_4.addWidget(self.lineEdit_batch_asr_inputDir)
 
-        self.btn_batch_asr_inputDir_select = QPushButton(self.widget2)
+        self.btn_batch_asr_inputDir_select = QPushButton(self.tab_batch_asr)
         self.btn_batch_asr_inputDir_select.setObjectName(u"btn_batch_asr_inputDir_select")
 
         self.horizontalLayout_4.addWidget(self.btn_batch_asr_inputDir_select)
 
-        self.btn_batch_asr_inputDir_open = QPushButton(self.widget2)
+        self.btn_batch_asr_inputDir_open = QPushButton(self.tab_batch_asr)
         self.btn_batch_asr_inputDir_open.setObjectName(u"btn_batch_asr_inputDir_open")
 
         self.horizontalLayout_4.addWidget(self.btn_batch_asr_inputDir_open)
@@ -329,23 +342,23 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.label_4 = QLabel(self.widget2)
+        self.label_4 = QLabel(self.tab_batch_asr)
         self.label_4.setObjectName(u"label_4")
 
         self.horizontalLayout_5.addWidget(self.label_4)
 
-        self.lineEdit_batch_asr_outputDir = QLineEdit(self.widget2)
+        self.lineEdit_batch_asr_outputDir = QLineEdit(self.tab_batch_asr)
         self.lineEdit_batch_asr_outputDir.setObjectName(u"lineEdit_batch_asr_outputDir")
         self.lineEdit_batch_asr_outputDir.setMinimumSize(QSize(300, 0))
 
         self.horizontalLayout_5.addWidget(self.lineEdit_batch_asr_outputDir)
 
-        self.btn_batch_asr_outputDir_select = QPushButton(self.widget2)
+        self.btn_batch_asr_outputDir_select = QPushButton(self.tab_batch_asr)
         self.btn_batch_asr_outputDir_select.setObjectName(u"btn_batch_asr_outputDir_select")
 
         self.horizontalLayout_5.addWidget(self.btn_batch_asr_outputDir_select)
 
-        self.btn_batch_asr_outputDir_open = QPushButton(self.widget2)
+        self.btn_batch_asr_outputDir_open = QPushButton(self.tab_batch_asr)
         self.btn_batch_asr_outputDir_open.setObjectName(u"btn_batch_asr_outputDir_open")
 
         self.horizontalLayout_5.addWidget(self.btn_batch_asr_outputDir_open)
@@ -353,15 +366,27 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addLayout(self.horizontalLayout_5)
 
-        self.groupBox_14 = QGroupBox(self.widget2)
+        self.groupBox_14 = QGroupBox(self.tab_batch_asr)
         self.groupBox_14.setObjectName(u"groupBox_14")
         self.groupBox_14.setMinimumSize(QSize(0, 400))
+        self.verticalLayout_5 = QVBoxLayout(self.groupBox_14)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.plainTextEdit_batch_asr_result = QPlainTextEdit(self.groupBox_14)
         self.plainTextEdit_batch_asr_result.setObjectName(u"plainTextEdit_batch_asr_result")
-        self.plainTextEdit_batch_asr_result.setGeometry(QRect(30, 30, 521, 280))
         self.plainTextEdit_batch_asr_result.setMinimumSize(QSize(0, 280))
 
+        self.verticalLayout_5.addWidget(self.plainTextEdit_batch_asr_result)
+
+        self.btn_batch_asr = QPushButton(self.groupBox_14)
+        self.btn_batch_asr.setObjectName(u"btn_batch_asr")
+
+        self.verticalLayout_5.addWidget(self.btn_batch_asr)
+
+
         self.verticalLayout_4.addWidget(self.groupBox_14)
+
+
+        self.gridLayout_10.addLayout(self.verticalLayout_4, 0, 0, 1, 1)
 
         self.tabWidget_2.addTab(self.tab_batch_asr, "")
 
@@ -405,7 +430,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.tabWidget.setCurrentIndex(0)
-        self.tabWidget_2.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -436,10 +461,9 @@ class Ui_MainWindow(object):
         self.lab_asrSaveMessage.setText("")
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58\u8def\u5f84\uff1a", None))
         self.chkbox_asrResultSave.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u542f\u81ea\u52a8\u4fdd\u5b58", None))
-        self.btn_asr.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u8bc6\u522b", None))
         self.btn_asr_clear.setText(QCoreApplication.translate("MainWindow", u"\u6e05\u9664\u5185\u5bb9", None))
+        self.btn_asr.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u8bc6\u522b", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_single_asr), QCoreApplication.translate("MainWindow", u"\u5355\u8bed\u97f3\u8bc6\u522b", None))
-        self.btn_batch_asr.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u6279\u91cf\u8bc6\u522b", None))
         self.combox_modelSelect_batch.setItemText(0, QCoreApplication.translate("MainWindow", u"\u8bf7\u9009\u62e9\u8bed\u97f3\u8bc6\u522b\u6a21\u578b", None))
 
         self.groupBox_9.setTitle(QCoreApplication.translate("MainWindow", u"\u6a21\u5f0f\u9009\u62e9", None))
@@ -459,6 +483,7 @@ class Ui_MainWindow(object):
         self.btn_batch_asr_outputDir_select.setText(QCoreApplication.translate("MainWindow", u"\u9009\u62e9\u76ee\u5f55", None))
         self.btn_batch_asr_outputDir_open.setText(QCoreApplication.translate("MainWindow", u"\u6253\u5f00\u76ee\u5f55", None))
         self.groupBox_14.setTitle(QCoreApplication.translate("MainWindow", u"\u6279\u91cf\u8bc6\u522b\u7ed3\u679c", None))
+        self.btn_batch_asr.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u6279\u91cf\u8bc6\u522b", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_batch_asr), QCoreApplication.translate("MainWindow", u"\u6279\u91cf\u8bed\u97f3\u8bc6\u522b", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_asr), QCoreApplication.translate("MainWindow", u"\u8bed\u97f3\u8bc6\u522b", None))
         self.groupBox_7.setTitle(QCoreApplication.translate("MainWindow", u"\u57fa\u7840\u8bbe\u7f6e", None))
