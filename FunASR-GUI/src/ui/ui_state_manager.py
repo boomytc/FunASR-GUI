@@ -63,3 +63,6 @@ class UIStateManager_ASR(QObject):
             'batch_output_dir': self.main_window.lineEdit_batch_asr_outputDir.text(),
             'is_save_enabled': self.main_window.chkbox_asrResultSave.isChecked()
         } 
+    
+class UIStateManager_TTS(QObject):
+    pass
