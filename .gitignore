@@ -17,6 +17,7 @@ __pycache__/
 *.pyo
 *.pyd
 *.log
+*.rst
 
 #忽略模型文件
 models/
