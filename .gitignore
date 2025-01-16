@@ -18,12 +18,8 @@ __pycache__/
 *.pyd
 *.log
 
-#忽略配置文件
-config.ini
-
 #忽略模型文件
 models/
 pretrained_models/
 .DS_Store
 .venv
-FunASR-GUI/config.ini
