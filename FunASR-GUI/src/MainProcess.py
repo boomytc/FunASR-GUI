@@ -3,6 +3,7 @@ from ui.main_ui import Ui_MainWindow
 from ui.ui_state_manager import UIStateManager_ASR
 from asr_process import ASRProcess
 import os
+import platform
 
 class MainProcess(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -45,7 +46,15 @@ class MainProcess(QMainWindow, Ui_MainWindow):
 
     def open_setting_file(self):
         """打开配置文件"""
-        os.system('gedit FunASR-GUI/FunASR-GUI/config.ini')
+        config_path = 'FunASR-GUI/config.ini'
+        system = platform.system().lower()
+        
+        if system == 'linux':
+            os.system(f'gedit {config_path}')
+        elif system == 'windows':
+            os.system(f'notepad {config_path}')
+        elif system == 'darwin':  # macOS
+            os.system(f'open {config_path}')
 
     def closeEvent(self, event):
         self.m_flag = False
