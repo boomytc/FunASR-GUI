@@ -13,10 +13,9 @@
 - 音视频处理 (开发中)
 - 模型对比功能 (开发中)
 
-## 支持的模型
+## 支持的模型(modelscope上的Paraformer模型)
 
 - Paraformer语音识别-中文-通用-16k-离线-large-长音频版模型
-- Paraformer语音识别-中文-通用-16k-离线-large-长音频版模型(热词版)
 
 ## 环境要求
 
@@ -27,36 +26,39 @@
 ## 安装说明
 
 1. 克隆项目
-bash
+```bash
 git clone https://github.com/yourusername/FunASR-GUI.git && cd FunASR-GUI
-
+```
 2. 创建虚拟环境
-bash
+```bash
 python -m venv .venv
 source .venv/bin/activate # Linux/macOS
 或
 .venv\Scripts\activate # Windows
-
+```
 3. 安装依赖
-bash
+```bash
 pip install torch torchvision torchaudio
 pip install PySide6
 pip install -U funasr
+```
 
 4. 配置模型路径
 编辑 `config.ini` 文件，设置正确的模型路径：
-ini
+```ini
 [ASRModelPaths]
 Linux/macOS
 base_dir = /path/to/your/models
 Windows
 #base_dir = C:/path/to/your/models
+```
 
 ## 使用说明
 
 1. 启动程序
-bash
+```bash 
 python src/main.py
+```
 
 2. 语音识别使用流程：
    - 选择识别模型
@@ -67,7 +69,7 @@ python src/main.py
    - 保存结果（支持TXT和SRT格式）
 
 ## 项目结构
-
+```markdownkdown
 FunASR-GUI/
 ├── config.ini        # 配置文件
 ├── src/              # 源代码目录
@@ -79,6 +81,7 @@ FunASR-GUI/
 │   ├── ui/           # UI文件
 │   ├── utils/        # 工具类
 │   └── models/       # 模型目录
+```
 
 ## 注意事项
 
