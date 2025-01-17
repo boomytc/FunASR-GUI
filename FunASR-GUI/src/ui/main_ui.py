@@ -16,17 +16,18 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
-    QGridLayout, QGroupBox, QHBoxLayout, QLabel,
-    QLineEdit, QMainWindow, QPlainTextEdit, QPushButton,
-    QRadioButton, QSizePolicy, QStatusBar, QTabWidget,
-    QTextEdit, QToolBar, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDoubleSpinBox,
+    QFrame, QGridLayout, QGroupBox, QHBoxLayout,
+    QLabel, QLineEdit, QMainWindow, QPlainTextEdit,
+    QPushButton, QRadioButton, QSizePolicy, QSpinBox,
+    QStatusBar, QTabWidget, QTextEdit, QToolBar,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(978, 811)
+        MainWindow.resize(978, 845)
         self.act_open_setting_file = QAction(MainWindow)
         self.act_open_setting_file.setObjectName(u"act_open_setting_file")
         self.act_open_setting_file.setMenuRole(QAction.MenuRole.NoRole)
@@ -181,19 +182,19 @@ class Ui_MainWindow(object):
         self.lab_asrSaveMessage.setObjectName(u"lab_asrSaveMessage")
         self.lab_asrSaveMessage.setGeometry(QRect(10, 60, 241, 17))
         self.lab_asrSaveMessage.setFont(font1)
-        self.widget = QWidget(self.groupBox_asrSave)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(22, 31, 221, 31))
-        self.horizontalLayout_3 = QHBoxLayout(self.widget)
+        self.layoutWidget = QWidget(self.groupBox_asrSave)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(22, 31, 221, 31))
+        self.horizontalLayout_3 = QHBoxLayout(self.layoutWidget)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.label_2 = QLabel(self.widget)
+        self.label_2 = QLabel(self.layoutWidget)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setMaximumSize(QSize(60, 16777215))
 
         self.horizontalLayout_3.addWidget(self.label_2)
 
-        self.lineEdit_asrSavaDir = QLineEdit(self.widget)
+        self.lineEdit_asrSavaDir = QLineEdit(self.layoutWidget)
         self.lineEdit_asrSavaDir.setObjectName(u"lineEdit_asrSavaDir")
         self.lineEdit_asrSavaDir.setMaximumSize(QSize(160, 16777215))
 
@@ -395,18 +396,233 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.tab_asr, "")
         self.tab_tts = QWidget()
         self.tab_tts.setObjectName(u"tab_tts")
-        self.groupBox_7 = QGroupBox(self.tab_tts)
-        self.groupBox_7.setObjectName(u"groupBox_7")
-        self.groupBox_7.setGeometry(QRect(20, 10, 601, 121))
-        self.groupBox_8 = QGroupBox(self.tab_tts)
-        self.groupBox_8.setObjectName(u"groupBox_8")
-        self.groupBox_8.setGeometry(QRect(20, 170, 621, 241))
-        self.groupBox_6 = QGroupBox(self.groupBox_8)
+        self.gridLayout_12 = QGridLayout(self.tab_tts)
+        self.gridLayout_12.setObjectName(u"gridLayout_12")
+        self.tabWidget_3 = QTabWidget(self.tab_tts)
+        self.tabWidget_3.setObjectName(u"tabWidget_3")
+        self.tab_single_tts = QWidget()
+        self.tab_single_tts.setObjectName(u"tab_single_tts")
+        self.groupBox_6 = QGroupBox(self.tab_single_tts)
         self.groupBox_6.setObjectName(u"groupBox_6")
-        self.groupBox_6.setGeometry(QRect(20, 30, 211, 111))
-        self.label = QLabel(self.groupBox_6)
-        self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(10, 30, 67, 17))
+        self.groupBox_6.setGeometry(QRect(10, 8, 320, 71))
+        self.groupBox_6.setMinimumSize(QSize(320, 0))
+        self.groupBox_6.setMaximumSize(QSize(320, 80))
+        self.gridLayout_13 = QGridLayout(self.groupBox_6)
+        self.gridLayout_13.setObjectName(u"gridLayout_13")
+        self.combox_tts_model_select_single = QComboBox(self.groupBox_6)
+        self.combox_tts_model_select_single.setObjectName(u"combox_tts_model_select_single")
+        self.combox_tts_model_select_single.setMaximumSize(QSize(300, 30))
+
+        self.gridLayout_13.addWidget(self.combox_tts_model_select_single, 0, 0, 1, 1)
+
+        self.lab_tts_model_introduce = QLabel(self.tab_single_tts)
+        self.lab_tts_model_introduce.setObjectName(u"lab_tts_model_introduce")
+        self.lab_tts_model_introduce.setGeometry(QRect(10, 80, 320, 60))
+        self.lab_tts_model_introduce.setMinimumSize(QSize(100, 60))
+        self.lab_tts_model_introduce.setMaximumSize(QSize(320, 80))
+        self.lab_tts_model_introduce.setTextFormat(Qt.TextFormat.AutoText)
+        self.lab_tts_model_introduce.setWordWrap(True)
+        self.groupBox_7 = QGroupBox(self.tab_single_tts)
+        self.groupBox_7.setObjectName(u"groupBox_7")
+        self.groupBox_7.setGeometry(QRect(370, 0, 531, 141))
+        self.gridLayout_14 = QGridLayout(self.groupBox_7)
+        self.gridLayout_14.setObjectName(u"gridLayout_14")
+        self.textEdit_tts_txtInput_single = QTextEdit(self.groupBox_7)
+        self.textEdit_tts_txtInput_single.setObjectName(u"textEdit_tts_txtInput_single")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.textEdit_tts_txtInput_single.sizePolicy().hasHeightForWidth())
+        self.textEdit_tts_txtInput_single.setSizePolicy(sizePolicy)
+
+        self.gridLayout_14.addWidget(self.textEdit_tts_txtInput_single, 0, 0, 1, 1)
+
+        self.groupBox_8 = QGroupBox(self.tab_single_tts)
+        self.groupBox_8.setObjectName(u"groupBox_8")
+        self.groupBox_8.setGeometry(QRect(10, 140, 891, 191))
+        self.groupBox_15 = QGroupBox(self.groupBox_8)
+        self.groupBox_15.setObjectName(u"groupBox_15")
+        self.groupBox_15.setGeometry(QRect(10, 20, 139, 161))
+        self.verticalLayout_6 = QVBoxLayout(self.groupBox_15)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.radiobtn_mode_pretrainedvoice = QRadioButton(self.groupBox_15)
+        self.radiobtn_mode_pretrainedvoice.setObjectName(u"radiobtn_mode_pretrainedvoice")
+
+        self.verticalLayout_6.addWidget(self.radiobtn_mode_pretrainedvoice)
+
+        self.radiobtn_mode_fastclone = QRadioButton(self.groupBox_15)
+        self.radiobtn_mode_fastclone.setObjectName(u"radiobtn_mode_fastclone")
+
+        self.verticalLayout_6.addWidget(self.radiobtn_mode_fastclone)
+
+        self.radiobtn_mode_transclone = QRadioButton(self.groupBox_15)
+        self.radiobtn_mode_transclone.setObjectName(u"radiobtn_mode_transclone")
+
+        self.verticalLayout_6.addWidget(self.radiobtn_mode_transclone)
+
+        self.radiobtn_mode_instruct = QRadioButton(self.groupBox_15)
+        self.radiobtn_mode_instruct.setObjectName(u"radiobtn_mode_instruct")
+
+        self.verticalLayout_6.addWidget(self.radiobtn_mode_instruct)
+
+        self.groupBox_16 = QGroupBox(self.groupBox_8)
+        self.groupBox_16.setObjectName(u"groupBox_16")
+        self.groupBox_16.setGeometry(QRect(160, 20, 280, 161))
+        self.gridLayout_15 = QGridLayout(self.groupBox_16)
+        self.gridLayout_15.setObjectName(u"gridLayout_15")
+        self.textEdit_guid = QTextEdit(self.groupBox_16)
+        self.textEdit_guid.setObjectName(u"textEdit_guid")
+
+        self.gridLayout_15.addWidget(self.textEdit_guid, 0, 0, 1, 1)
+
+        self.groupBox_17 = QGroupBox(self.groupBox_8)
+        self.groupBox_17.setObjectName(u"groupBox_17")
+        self.groupBox_17.setGeometry(QRect(460, 20, 201, 71))
+        self.gridLayout_16 = QGridLayout(self.groupBox_17)
+        self.gridLayout_16.setObjectName(u"gridLayout_16")
+        self.combox_pretrainedvoice_select = QComboBox(self.groupBox_17)
+        self.combox_pretrainedvoice_select.setObjectName(u"combox_pretrainedvoice_select")
+
+        self.gridLayout_16.addWidget(self.combox_pretrainedvoice_select, 0, 0, 1, 1)
+
+        self.groupBox_18 = QGroupBox(self.groupBox_8)
+        self.groupBox_18.setObjectName(u"groupBox_18")
+        self.groupBox_18.setGeometry(QRect(710, 100, 110, 72))
+        self.horizontalLayout_8 = QHBoxLayout(self.groupBox_18)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.radiobtn_streamY = QRadioButton(self.groupBox_18)
+        self.radiobtn_streamY.setObjectName(u"radiobtn_streamY")
+
+        self.horizontalLayout_8.addWidget(self.radiobtn_streamY)
+
+        self.radiobtn_streamN = QRadioButton(self.groupBox_18)
+        self.radiobtn_streamN.setObjectName(u"radiobtn_streamN")
+
+        self.horizontalLayout_8.addWidget(self.radiobtn_streamN)
+
+        self.groupBox_19 = QGroupBox(self.groupBox_8)
+        self.groupBox_19.setObjectName(u"groupBox_19")
+        self.groupBox_19.setGeometry(QRect(700, 20, 101, 70))
+        self.gridLayout_17 = QGridLayout(self.groupBox_19)
+        self.gridLayout_17.setObjectName(u"gridLayout_17")
+        self.dSpinBox_speed_single = QDoubleSpinBox(self.groupBox_19)
+        self.dSpinBox_speed_single.setObjectName(u"dSpinBox_speed_single")
+        self.dSpinBox_speed_single.setMinimum(0.500000000000000)
+        self.dSpinBox_speed_single.setMaximum(2.000000000000000)
+        self.dSpinBox_speed_single.setSingleStep(0.100000000000000)
+        self.dSpinBox_speed_single.setValue(1.000000000000000)
+
+        self.gridLayout_17.addWidget(self.dSpinBox_speed_single, 0, 0, 1, 1)
+
+        self.groupBox_20 = QGroupBox(self.groupBox_8)
+        self.groupBox_20.setObjectName(u"groupBox_20")
+        self.groupBox_20.setGeometry(QRect(460, 100, 219, 74))
+        self.horizontalLayout_9 = QHBoxLayout(self.groupBox_20)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.spinBox_randInference_single = QSpinBox(self.groupBox_20)
+        self.spinBox_randInference_single.setObjectName(u"spinBox_randInference_single")
+        self.spinBox_randInference_single.setMinimum(-999999999)
+        self.spinBox_randInference_single.setMaximum(999999999)
+
+        self.horizontalLayout_9.addWidget(self.spinBox_randInference_single)
+
+        self.btn_randGenerate_single = QPushButton(self.groupBox_20)
+        self.btn_randGenerate_single.setObjectName(u"btn_randGenerate_single")
+
+        self.horizontalLayout_9.addWidget(self.btn_randGenerate_single)
+
+        self.groupBox_21 = QGroupBox(self.tab_single_tts)
+        self.groupBox_21.setObjectName(u"groupBox_21")
+        self.groupBox_21.setGeometry(QRect(10, 330, 901, 131))
+        self.horizontalLayout_11 = QHBoxLayout(self.groupBox_21)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.groupBox_22 = QGroupBox(self.groupBox_21)
+        self.groupBox_22.setObjectName(u"groupBox_22")
+        self.gridLayout_18 = QGridLayout(self.groupBox_22)
+        self.gridLayout_18.setObjectName(u"gridLayout_18")
+        self.horizontalLayout_10 = QHBoxLayout()
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.btn_upload_prompt_audio_single = QPushButton(self.groupBox_22)
+        self.btn_upload_prompt_audio_single.setObjectName(u"btn_upload_prompt_audio_single")
+        self.btn_upload_prompt_audio_single.setMaximumSize(QSize(120, 80))
+
+        self.horizontalLayout_10.addWidget(self.btn_upload_prompt_audio_single)
+
+        self.label_prompt_audioname_single = QLabel(self.groupBox_22)
+        self.label_prompt_audioname_single.setObjectName(u"label_prompt_audioname_single")
+        self.label_prompt_audioname_single.setFont(font)
+        self.label_prompt_audioname_single.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.horizontalLayout_10.addWidget(self.label_prompt_audioname_single)
+
+
+        self.gridLayout_18.addLayout(self.horizontalLayout_10, 0, 0, 1, 1)
+
+
+        self.horizontalLayout_11.addWidget(self.groupBox_22)
+
+        self.groupBox_23 = QGroupBox(self.groupBox_21)
+        self.groupBox_23.setObjectName(u"groupBox_23")
+        self.gridLayout_19 = QGridLayout(self.groupBox_23)
+        self.gridLayout_19.setObjectName(u"gridLayout_19")
+        self.textEdit_promptInput_single = QTextEdit(self.groupBox_23)
+        self.textEdit_promptInput_single.setObjectName(u"textEdit_promptInput_single")
+
+        self.gridLayout_19.addWidget(self.textEdit_promptInput_single, 0, 0, 1, 1)
+
+
+        self.horizontalLayout_11.addWidget(self.groupBox_23)
+
+        self.groupBox_24 = QGroupBox(self.tab_single_tts)
+        self.groupBox_24.setObjectName(u"groupBox_24")
+        self.groupBox_24.setGeometry(QRect(10, 460, 901, 121))
+        self.gridLayout_20 = QGridLayout(self.groupBox_24)
+        self.gridLayout_20.setObjectName(u"gridLayout_20")
+        self.groupBox_25 = QGroupBox(self.groupBox_24)
+        self.groupBox_25.setObjectName(u"groupBox_25")
+        self.textEdit_instructInput_single = QTextEdit(self.groupBox_25)
+        self.textEdit_instructInput_single.setObjectName(u"textEdit_instructInput_single")
+        self.textEdit_instructInput_single.setGeometry(QRect(10, 30, 851, 41))
+
+        self.gridLayout_20.addWidget(self.groupBox_25, 0, 0, 1, 1)
+
+        self.groupBox_26 = QGroupBox(self.tab_single_tts)
+        self.groupBox_26.setObjectName(u"groupBox_26")
+        self.groupBox_26.setGeometry(QRect(20, 580, 391, 91))
+        self.layoutWidget_3 = QWidget(self.groupBox_26)
+        self.layoutWidget_3.setObjectName(u"layoutWidget_3")
+        self.layoutWidget_3.setGeometry(QRect(20, 40, 231, 31))
+        self.horizontalLayout_12 = QHBoxLayout(self.layoutWidget_3)
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
+        self.horizontalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.label_5 = QLabel(self.layoutWidget_3)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setMaximumSize(QSize(60, 16777215))
+
+        self.horizontalLayout_12.addWidget(self.label_5)
+
+        self.lineEdit_ttsSavaDir = QLineEdit(self.layoutWidget_3)
+        self.lineEdit_ttsSavaDir.setObjectName(u"lineEdit_ttsSavaDir")
+        self.lineEdit_ttsSavaDir.setMaximumSize(QSize(160, 16777215))
+
+        self.horizontalLayout_12.addWidget(self.lineEdit_ttsSavaDir)
+
+        self.btn_ttsResultDirSelect = QPushButton(self.groupBox_26)
+        self.btn_ttsResultDirSelect.setObjectName(u"btn_ttsResultDirSelect")
+        self.btn_ttsResultDirSelect.setGeometry(QRect(280, 30, 89, 25))
+        self.btn_ttsResultDirOpen = QPushButton(self.groupBox_26)
+        self.btn_ttsResultDirOpen.setObjectName(u"btn_ttsResultDirOpen")
+        self.btn_ttsResultDirOpen.setGeometry(QRect(280, 60, 89, 25))
+        self.btn_tts = QPushButton(self.tab_single_tts)
+        self.btn_tts.setObjectName(u"btn_tts")
+        self.btn_tts.setGeometry(QRect(590, 610, 101, 41))
+        self.tabWidget_3.addTab(self.tab_single_tts, "")
+        self.tab_batch_tts = QWidget()
+        self.tab_batch_tts.setObjectName(u"tab_batch_tts")
+        self.tabWidget_3.addTab(self.tab_batch_tts, "")
+
+        self.gridLayout_12.addWidget(self.tabWidget_3, 0, 1, 1, 1)
+
         self.tabWidget.addTab(self.tab_tts, "")
         self.tab_audioprocess = QWidget()
         self.tab_audioprocess.setObjectName(u"tab_audioprocess")
@@ -431,6 +647,7 @@ class Ui_MainWindow(object):
 
         self.tabWidget.setCurrentIndex(0)
         self.tabWidget_2.setCurrentIndex(0)
+        self.tabWidget_3.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -486,10 +703,47 @@ class Ui_MainWindow(object):
         self.btn_batch_asr.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u6279\u91cf\u8bc6\u522b", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_batch_asr), QCoreApplication.translate("MainWindow", u"\u6279\u91cf\u8bed\u97f3\u8bc6\u522b", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_asr), QCoreApplication.translate("MainWindow", u"\u8bed\u97f3\u8bc6\u522b", None))
-        self.groupBox_7.setTitle(QCoreApplication.translate("MainWindow", u"\u57fa\u7840\u8bbe\u7f6e", None))
-        self.groupBox_8.setTitle(QCoreApplication.translate("MainWindow", u"\u8fdb\u9636\u8bbe\u7f6e", None))
-        self.groupBox_6.setTitle(QCoreApplication.translate("MainWindow", u"\u97f3\u9891", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"\u8bf4\u8bdd\u901f\u5ea6", None))
+        self.groupBox_6.setTitle(QCoreApplication.translate("MainWindow", u"\u9009\u62e9\u6a21\u578b", None))
+        self.lab_tts_model_introduce.setText(QCoreApplication.translate("MainWindow", u"\u57fa\u7840\u6a21\u578b\uff0c\u652f\u6301\u4e0e\u8bad\u7ec3\u963f\u8fbe\u788e\u7247\u52a0\u5927\u6253\u51fb\u554a\u554a\u5927\u5927\u8428\u5927\u5927\u963f\u65af\u963f\u65af\u5927\u5927\u554a\u963f\u8fbe\u4e3a\u5927\u8d5b\u963f\u9053\u7684\u5e74\u554a\u7684\u54e6\u662f\u554a\u7684\u54e6\u554a\u6211\u7684\u9a84\u50b2\u548c", None))
+        self.groupBox_7.setTitle(QCoreApplication.translate("MainWindow", u"\u8f93\u5165\u5408\u6210\u6587\u672c", None))
+        self.textEdit_tts_txtInput_single.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\u5927\u901f\u5ea6\u548c\u6211insnvdsiapdoaj\u554a\u7684\u5927\u5927\u5927\u8d5b\u963f\u8fbe\u4e09\u5927\u554a\u554a\u5927\u8d5b\u5de8\u5927\u5927\u5927\u7684\u5965\u55f2\u4e09\u5e26\u54e6\u5927\u5927\u8d5b\u7684\u54e6iadjad\u963f\u65af\u5230idasjd</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><b"
+                        "r /></p></body></html>", None))
+        self.groupBox_8.setTitle(QCoreApplication.translate("MainWindow", u"\u57fa\u7840\u914d\u7f6e", None))
+        self.groupBox_15.setTitle(QCoreApplication.translate("MainWindow", u"\u6a21\u5f0f\u9009\u62e9", None))
+        self.radiobtn_mode_pretrainedvoice.setText(QCoreApplication.translate("MainWindow", u"\u9884\u8bad\u7ec3\u97f3\u8272", None))
+        self.radiobtn_mode_fastclone.setText(QCoreApplication.translate("MainWindow", u"3s\u6781\u901f\u590d\u523b", None))
+        self.radiobtn_mode_transclone.setText(QCoreApplication.translate("MainWindow", u"\u8de8\u8bed\u79cd\u590d\u523b", None))
+        self.radiobtn_mode_instruct.setText(QCoreApplication.translate("MainWindow", u"\u81ea\u7136\u8bed\u8a00\u63a7\u5236", None))
+        self.groupBox_16.setTitle(QCoreApplication.translate("MainWindow", u"\u64cd\u4f5c\u6b65\u9aa4", None))
+        self.groupBox_17.setTitle(QCoreApplication.translate("MainWindow", u"\u9884\u8bad\u7ec3\u97f3\u8272\u9009\u62e9", None))
+        self.groupBox_18.setTitle(QCoreApplication.translate("MainWindow", u"\u662f\u5426\u6d41\u5f0f\u63a8\u7406", None))
+        self.radiobtn_streamY.setText(QCoreApplication.translate("MainWindow", u"\u662f", None))
+        self.radiobtn_streamN.setText(QCoreApplication.translate("MainWindow", u"\u5426", None))
+        self.groupBox_19.setTitle(QCoreApplication.translate("MainWindow", u"\u901f\u5ea6\u8c03\u8282", None))
+        self.groupBox_20.setTitle(QCoreApplication.translate("MainWindow", u"\u968f\u673a\u63a8\u7406\u79cd\u5b50", None))
+        self.btn_randGenerate_single.setText(QCoreApplication.translate("MainWindow", u"\u968f\u673a", None))
+        self.groupBox_21.setTitle(QCoreApplication.translate("MainWindow", u"prompt\u914d\u7f6e", None))
+        self.groupBox_22.setTitle(QCoreApplication.translate("MainWindow", u"\u9009\u62e9prompt\u97f3\u9891\u6587\u4ef6", None))
+        self.btn_upload_prompt_audio_single.setText(QCoreApplication.translate("MainWindow", u"\u4e0a\u4f20", None))
+        self.label_prompt_audioname_single.setText(QCoreApplication.translate("MainWindow", u"\u8bf7\u4e0a\u4f20\u9700\u8981\u8bc6\u522b\u7684\u97f3\u9891\u6587\u4ef6", None))
+        self.groupBox_23.setTitle(QCoreApplication.translate("MainWindow", u"\u8f93\u5165prompt\u6587\u672c", None))
+        self.groupBox_24.setTitle(QCoreApplication.translate("MainWindow", u"instruct\u914d\u7f6e", None))
+        self.groupBox_25.setTitle(QCoreApplication.translate("MainWindow", u"\u8f93\u5165instruct\u6587\u672c", None))
+        self.groupBox_26.setTitle(QCoreApplication.translate("MainWindow", u"\u7ed3\u679c\u4fdd\u5b58", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58\u8def\u5f84\uff1a", None))
+        self.btn_ttsResultDirSelect.setText(QCoreApplication.translate("MainWindow", u"\u9009\u62e9\u8def\u5f84", None))
+        self.btn_ttsResultDirOpen.setText(QCoreApplication.translate("MainWindow", u"\u6253\u5f00\u8def\u5f84", None))
+        self.btn_tts.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u5408\u6210", None))
+        self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_single_tts), QCoreApplication.translate("MainWindow", u"\u5355\u8bed\u97f3\u5408\u6210", None))
+        self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_batch_tts), QCoreApplication.translate("MainWindow", u"\u6279\u91cf\u8bed\u97f3\u5408\u6210", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_tts), QCoreApplication.translate("MainWindow", u"\u8bed\u97f3\u5408\u6210", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_audioprocess), QCoreApplication.translate("MainWindow", u"\u97f3\u89c6\u9891\u5904\u7406", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_asrModelCompare), QCoreApplication.translate("MainWindow", u"\u6a21\u578b\u5bf9\u6bd4", None))
